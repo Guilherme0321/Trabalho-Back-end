@@ -2,7 +2,6 @@ document.querySelector("#form").addEventListener('submit', (e) => {
   let name = document.querySelector("#nome_completo");
   let email = document.querySelector("#Email").value;
   let senha = document.querySelector("#Senha").value;
-  e.preventDefault();
 
   if (/^[a-zA-Z]+$/.test(name.value)) {
     var xml = new XMLHttpRequest();

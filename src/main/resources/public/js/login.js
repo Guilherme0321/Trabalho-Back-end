@@ -1,4 +1,4 @@
-document.querySelector("#myForm").addEventListener("submit", function (event) {
+document.querySelector("#form").addEventListener("submit", function (event) {
   event.preventDefault(); // Impede o envio padrão do formulário
 
   let user = document.querySelector("#nome").value;
