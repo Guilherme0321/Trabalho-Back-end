@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Back_end</groupId>
+  <artifactId>Back_end_THELDO</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Back_code</name>
+  <dependencies>	  
+	<dependency>
+	    <groupId>org.postgresql</groupId>
+	    <artifactId>postgresql</artifactId>
+	    <version>42.6.0</version>
+	</dependency>
+
+	<dependency>
+    	<groupId>com.sparkjava</groupId>
+    	<artifactId>spark-core</artifactId>
+    	<version>2.9.3</version>
+	</dependency>
+	<dependency>
+	    <groupId>ch.qos.logback</groupId>
+	    <artifactId>logback-classic</artifactId>
+	    <version>1.2.6</version>
+	</dependency>
+	
+	
+  </dependencies>
+</project>

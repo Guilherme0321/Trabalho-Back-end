@@ -1,0 +1,125 @@
+/* Made with love by Mutiullah Samim*/
+@import url('https://fonts.googleapis.com/css?family=Numans');
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+ul.list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    background: #6777;
+    margin-left: 0;
+    width: 100%;
+}
+nav.navBAR {
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    padding: 0;
+    top: 0;
+    width: 100%;
+}
+body {
+    font-weight: 500;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column; /* Added to make content stack vertically */
+    justify-content: center; /* Added to vertically center content */
+    align-items: center; /* Added to horizontally center content */
+}
+
+.container {
+    height: 100%;
+    align-content: center;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%; /* Adjust the height as needed */
+    margin-bottom: 10%; /* Added margin to separate the tags from the login block */
+}
+
+.header-tag {
+    margin: 0 10%; /* Adjust the spacing as needed */
+    font-size: 24px; /* Adjust the font size as needed */
+    color: white; /* Set the color to white */
+}
+
+.card {
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    height: 260px;
+}
+
+.social_icon span {
+    font-size: 60px;
+    margin-left: 10px;
+    color: #005784;
+}
+
+.social_icon span:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.card-header h3 {
+    color: white;
+}
+
+.social_icon {
+    position: absolute;
+    right: 20px;
+    top: -45px;
+}
+
+.input-group-prepend span {
+    background-color: #005784;
+    width: 50px;
+    color: black;
+    border: 0 !important;
+}
+
+input:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.remember {
+    color: white;
+}
+
+.remember input {
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+.login_btn {
+    width: 100px;
+    background-color: #005784;
+    border: 1px solid black;
+    color: black;
+    border: 0 !important;
+}
+
+.login_btn:hover {
+    background-color: #2c7092;
+}
+
+.links {
+    color: white;
+}
+
+.links a {
+    margin-left: 4px;
+}
