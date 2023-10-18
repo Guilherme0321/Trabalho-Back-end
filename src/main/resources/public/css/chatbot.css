@@ -1,8 +1,25 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background: rgb(20, 71, 209);
 }
 
+ul.list {
+    display: flex;
+   justify-content: space-around;
+   align-items: center;
+   list-style: none;
+   background: rgb(180, 179, 179);
+   margin:  auto;
+   width: 1450px;
+   color: #ffffff;
+   border-radius: 15px;
+   height: 50px; /* Reduza a altura da barra */
+   margin-top: 10px;
+}
+  ul.list li {
+    text-align: center; /* Centralize o texto horizontalmente */
+  }
+  
 /* Chat window styles */
 #chat-window {
     height: 85%;

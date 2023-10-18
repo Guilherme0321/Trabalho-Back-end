@@ -6,15 +6,7 @@
     border: 0;
     box-sizing: border-box;
 }
-ul.list {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    list-style: none;
-    background: #6777;
-    margin-left: 0;
-    width: 100%;
-}
+
 nav.navBAR {
     left: 50%;
     transform: translateX(-50%);
@@ -30,6 +22,22 @@ body {
     flex-direction: column; /* Added to make content stack vertically */
     justify-content: center; /* Added to vertically center content */
     align-items: center; /* Added to horizontally center content */
+    background: rgb(16, 57, 169);
+}
+
+
+ul.list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    background: rgb(180, 179, 179);
+    margin: 10px auto;
+    width: 400px;
+    color: #FFFFFF;
+    border-radius: 15px;
+    height: 50px; /* Reduza a altura da barra */
+    margin-top: 10px;
 }
 
 .container {

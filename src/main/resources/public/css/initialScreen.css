@@ -3,29 +3,40 @@ body {
     padding: 0px;
     transition: margin-left .5s;
     font-family: Arial, Helvetica, sans-serif;
+    background: rgb(16, 57, 169);
 }
 
 main {
-    padding: 15px 30px;
+    padding: 15px 400px;
+}
+
+#tabela {
+    color: rgb(0, 0, 0);
+    background-color: rgb(209, 204, 204);
 }
 
 section {
     justify-content: center;
 }
 ul.list {
-    display: flex;
+     display: flex;
     justify-content: space-around;
     align-items: center;
     list-style: none;
-    background: #6777;
-    margin-left: 0;
+    background: rgb(180, 179, 179);
+    margin:  auto;
+    width: 740px;
+    color: #ffffff;
+    border-radius: 15px;
+    height: 50px; /* Reduza a altura da barra */
+    margin-top: 10px;
 }
-
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 
 @media screen and (max-height: 450px) {
-    
+
+
 }
 .sidenav {
     text-align: center;
@@ -48,9 +59,11 @@ footer {
     text-align: center;
 }
 .card{
-    margin-bottom: 25px;
-    padding:8px;
-    background-color: #d2f0ff;
-    border-color: #f8f8f8;
-    box-shadow: 8px 8px  #ededed;
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    height: 260px;
 }
+
