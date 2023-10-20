@@ -14,7 +14,7 @@ class Aplicacao {
 		get("/user", (req, res) -> { // Criar a forma de validação de dados
 		    String username = req.queryParams("nome");
 		    String senha = req.queryParams("senha");
-		    System.out.println(username + " " + senha);
+		    System.out.println(username + " algo " + senha);
 
 		    return "Login realizado com sucesso";
 		});
