@@ -7,7 +7,7 @@ public class Status {
 		if(status.equals("pendente") || status.equals("confirmada") || status.equals("cancelada")) {
 			this.setStatus(status);
 		}else {
-			throw new Exception("Somente 'pendente, confirmada, cancelada' sao aceitaveis");
+			throw new Exception("Somente 'pendente', 'confirmada', 'cancelada' sao aceitaveis");
 		}
 	}
 

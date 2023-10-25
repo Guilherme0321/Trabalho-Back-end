@@ -1,13 +1,13 @@
 package modelo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Professor {
 	private Integer id;
 	private String nome;
 	private String email;
 	private String senha;
-	private LocalDateTime data_cadastro;
+	private LocalDate data_cadastro;
 	private Nota nota;
 	private Aula aula; // podera ser alterado
 	
@@ -15,7 +15,7 @@ public class Professor {
 		this(id,nome, email, senha, null, null, null);
 	}
 	
-	public Professor(Integer id,String nome, String email, String senha, LocalDateTime data_cadastro, Nota nota, Aula aula) {
+	public Professor(Integer id,String nome, String email, String senha, LocalDate data_cadastro, Nota nota, Aula aula) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -46,7 +46,7 @@ public class Professor {
 	/* public void setSenha(String senha) {
 		this.senha = senha;
 	} */
-	public LocalDateTime getData() {
+	public LocalDate getData() {
 		return data_cadastro;
 	}
 	

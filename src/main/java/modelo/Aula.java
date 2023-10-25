@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Aula {
@@ -9,11 +10,11 @@ public class Aula {
 	private String descricao;
 	private Double preco;
 	private LocalDateTime disponivel;
-	private LocalDateTime data_criacao;
+	private LocalDate data_criacao;
 	private Nota nota;
 	private Reserva reserva; // poderá ser modificado
 		
-	public Aula(Integer id, Integer professor_id, String materia, String descricao, Double preco, LocalDateTime data_disponivel, LocalDateTime data_criacao, Nota nota, Reserva reserva) {
+	public Aula(Integer id, Integer professor_id, String materia, String descricao, Double preco, LocalDateTime data_disponivel, LocalDate data_criacao, Nota nota, Reserva reserva) {
 		this.id = id;
 		this.professor_id = professor_id;
 		this.materia = materia;
@@ -49,7 +50,7 @@ public class Aula {
 		this.disponivel = dataDisponibilidade;
 	}
 	
-	public void setDataCriacao(LocalDateTime dataCriacao) {
+	public void setDataCriacao(LocalDate dataCriacao) {
 		this.data_criacao = dataCriacao;
 	}
 	
@@ -81,7 +82,7 @@ public class Aula {
 		return disponivel;
 	}
 	
-	public LocalDateTime getDataCriacao() {
+	public LocalDate getDataCriacao() {
 		return data_criacao;
 	}
 	

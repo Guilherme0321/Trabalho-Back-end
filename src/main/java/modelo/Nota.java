@@ -1,6 +1,6 @@
 package modelo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Nota {
 	private Integer id;
@@ -9,13 +9,13 @@ public class Nota {
 	private Integer aula_id;
 	private Double nota;
 	private String comentario;
-	private LocalDateTime data_avaliada;
+	private LocalDate data_avaliada;
 	
 	public Nota(Integer id, Integer aluno_id, Integer professor_id) {
 		this(id,aluno_id,professor_id,null,null,null,null);
 	}
 	
-	public Nota(Integer id, Integer aluno_id, Integer professor_id, Integer aula_id, Double nota, String comentario, LocalDateTime data_avaliada) {
+	public Nota(Integer id, Integer aluno_id, Integer professor_id, Integer aula_id, Double nota, String comentario, LocalDate data_avaliada) {
 		this.id = id;
 		this.aluno_id = aluno_id;
 		this.professor_id = professor_id;
@@ -49,7 +49,7 @@ public class Nota {
 		this.comentario = comentario;
 	}
 	
-	public void setDataAvaliada(LocalDateTime data) {
+	public void setDataAvaliada(LocalDate data) {
 		this.data_avaliada = data;
 	}
 	
@@ -77,7 +77,7 @@ public class Nota {
 		return comentario;
 	}
 	
-	public LocalDateTime dataAvaliada() {
+	public LocalDate dataAvaliada() {
 		return data_avaliada;
 	}
 }
