@@ -6,24 +6,26 @@ import java.time.LocalDateTime;
 public class Aula {
 	private Integer id;
 	private Integer professor_id;
+	private Integer aluno_id;
 	private String materia;
 	private String descricao;
 	private Double preco;
 	private LocalDateTime disponivel;
 	private LocalDate data_criacao;
-	private Nota nota;
-	private Reserva reserva; // poderá ser modificado
+	private String tipo_aula;
+	private String link_aula;
 		
-	public Aula(Integer id, Integer professor_id, String materia, String descricao, Double preco, LocalDateTime data_disponivel, LocalDate data_criacao, Nota nota, Reserva reserva) {
+	public Aula(Integer id, Integer aluno_id, Integer professor_id, String materia, String descricao, Double preco, LocalDateTime data_disponivel, LocalDate data_criacao, String tipo_aula, String link) {
 		this.id = id;
 		this.professor_id = professor_id;
+		this.aluno_id = aluno_id;
 		this.materia = materia;
 		this.descricao = descricao;
 		this.preco = preco;
 		this.disponivel = data_disponivel;
 		this.data_criacao = data_criacao;
-		this.nota = nota;
-		this.reserva = reserva;
+		this.tipo_aula = tipo_aula;
+		this.link_aula = link;
 	}
 	
 	public void setId(Integer id) {
@@ -54,10 +56,6 @@ public class Aula {
 		this.data_criacao = dataCriacao;
 	}
 	
-	public void setNota(Nota nota) {
-		this.nota = nota;
-	}
-	
 	public Integer getId() {
 		return id;
 	}
@@ -85,16 +83,24 @@ public class Aula {
 	public LocalDate getDataCriacao() {
 		return data_criacao;
 	}
-	
-	public Nota getNota() {
-		return nota;
+
+	public Integer getAluno_id() {
+		return aluno_id;
 	}
 
-	public Reserva getReserva() {
-		return reserva;
+	public void setAluno_id(Integer aluno_id) {
+		this.aluno_id = aluno_id;
 	}
 
-	public void setReserva(Reserva reserva) {
-		this.reserva = reserva;
+	public String getTipo_aula() {
+		return tipo_aula;
+	}
+
+	public String getLink_aula() {
+		return link_aula;
+	}
+
+	public void setLink_aula(String link_aula) {
+		this.link_aula = link_aula;
 	}
 }

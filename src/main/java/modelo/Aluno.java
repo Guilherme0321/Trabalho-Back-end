@@ -8,20 +8,17 @@ public class Aluno {
 	private String email;
 	private String senha;
 	private LocalDate data_cadastro;
-	private Nota nota;
-	private Reserva reserva; // podera ser alterado
 	
-	public Aluno(String nome, String email, String senha) {
-		this(nome, email, senha, null, null, null);
+	public Aluno(Integer id,String nome, String email, String senha) {
+		this(id,nome, email, senha, null);
 	}
 	
-	public Aluno(String nome, String email, String senha, LocalDate data_cadastro, Nota nota, Reserva reserva) {
+	public Aluno(Integer id,String nome, String email, String senha, LocalDate data_cadastro) {
+		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.data_cadastro = data_cadastro;
-		this.nota = nota;
-		this.reserva = reserva;
 	}
 	public Integer getId(){
 		return id;
@@ -46,17 +43,5 @@ public class Aluno {
 	} */
 	public LocalDate getData() {
 		return data_cadastro;
-	}
-	public Nota getNota() {
-		return nota;
-	}
-	public void setNota(Nota nota) {
-		this.nota = nota;
-	}
-	public Reserva getReserva() {
-		return reserva;
-	}
-	public void setReserva(Reserva reserva) {
-		this.reserva = reserva;
 	}
 }

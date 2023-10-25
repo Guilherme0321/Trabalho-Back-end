@@ -8,21 +8,19 @@ public class Professor {
 	private String email;
 	private String senha;
 	private LocalDate data_cadastro;
-	private Nota nota;
-	private Aula aula; // podera ser alterado
+
 	
 	public Professor(Integer id,String nome, String email, String senha) {
-		this(id,nome, email, senha, null, null, null);
+		this(id,nome, email, senha, null);
 	}
 	
-	public Professor(Integer id,String nome, String email, String senha, LocalDate data_cadastro, Nota nota, Aula aula) {
+	public Professor(Integer id,String nome, String email, String senha, LocalDate data_cadastro) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
 		this.data_cadastro = data_cadastro;
-		this.nota = nota;
-		this.aula = aula;
+	
 	}
 	
 	public Integer getId(){
@@ -50,16 +48,4 @@ public class Professor {
 		return data_cadastro;
 	}
 	
-	public Nota getNota() {
-		return nota;
-	}
-	public void setNota(Nota nota) {
-		this.nota = nota;
-	}
-	public Aula getAula() {
-		return aula;
-	}
-	public void setAula(Aula aula) {
-		this.aula = aula;
-	}
 }

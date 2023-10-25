@@ -1,7 +1,5 @@
 package modelo;
 
-import java.time.LocalDate;
-
 public class Nota {
 	private Integer id;
 	private Integer aluno_id;
@@ -9,20 +7,20 @@ public class Nota {
 	private Integer aula_id;
 	private Double nota;
 	private String comentario;
-	private LocalDate data_avaliada;
+	private String origem; // se a nota veio de um professor ou de um aluno
 	
 	public Nota(Integer id, Integer aluno_id, Integer professor_id) {
 		this(id,aluno_id,professor_id,null,null,null,null);
 	}
 	
-	public Nota(Integer id, Integer aluno_id, Integer professor_id, Integer aula_id, Double nota, String comentario, LocalDate data_avaliada) {
+	public Nota(Integer id, Integer aluno_id, Integer professor_id, Integer aula_id, Double nota, String comentario, String origem) {
 		this.id = id;
 		this.aluno_id = aluno_id;
 		this.professor_id = professor_id;
 		this.aula_id = aula_id;
 		this.nota = nota;
 		this.comentario = comentario;
-		this.data_avaliada = data_avaliada;
+		this.origem = origem;
 	}
 	
 	public void setId(Integer id) {
@@ -49,10 +47,6 @@ public class Nota {
 		this.comentario = comentario;
 	}
 	
-	public void setDataAvaliada(LocalDate data) {
-		this.data_avaliada = data;
-	}
-	
 	public Integer getId() {
 		return this.id;
 	}
@@ -76,8 +70,13 @@ public class Nota {
 	public String getComentario() {
 		return comentario;
 	}
-	
-	public LocalDate dataAvaliada() {
-		return data_avaliada;
+
+	public String getOrigem() {
+		return origem;
 	}
+
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
+	
 }
