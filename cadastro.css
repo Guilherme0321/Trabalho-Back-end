@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+ul.list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  background: rgb(180, 179, 179);
+  margin: 10px auto;
+  width: 400px;
+  color: #FFFFFF;
+  border-radius: 15px;
+  height: 50px;
+  margin-top: 2; /* Reduzi a margem superior para 0 para deixá-la mais próxima do topo */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin-top: 2; /* Reduzi a margem superior para 0 para deixar o conteúdo mais próximo do topo */
+  background: rgb(16, 57, 169);
+}
+
+main {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5; /* Reduzi a margem superior para 0 para deixar o conteúdo mais próximo do topo */
+}
+
+nav.navBAR {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+main h1 {
+  /*color: #ffcc57;*/
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  margin-top: 0; /* Reduzi a margem superior para 0 para deixá-lo mais próximo das etiquetas */
+}
+
+main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0; /* Reduzi a margem superior para 0 para deixar o formulário mais próximo do título */
+}
+
+main form label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0; /* Reduzi a margem superior para 0 para deixar as etiquetas mais próximas umas das outras */
+}
+
+main form label span {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+main form input {
+  /*background: #000919;*/
+  width: 300px;
+  height: 50px;
+  padding: 0 0.5rem;
+  margin-top: 0.5; /* Reduzi a margem superior para 0 para deixar os campos de entrada mais próximos um do outro */
+  outline: none;
+  /*color: white;*/
+  font-size: 1rem;
+  border: 1px solid #040B18;
+  border-radius: 8px;
+}
+
+main form input[type="submit"] {
+  cursor: pointer;
+  width: 50%;
+  margin-top: 2rem; /* Reduzi a margem superior para deixá-lo mais próximo dos campos de entrada */
+  border: none;
+  border-radius: 32px;
+  background-color: #033d5a;
+  color: rgb(209, 204, 204);
+  font-size: 1.1rem;
+  transition: all .3s ease-in-out;
+  align-items: center;
+}
+
+main form input[type="submit"]:hover {
+  background-color: #065177;
+}
