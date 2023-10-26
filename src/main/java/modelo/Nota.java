@@ -5,7 +5,7 @@ public class Nota {
 	private Integer aluno_id;
 	private Integer professor_id;
 	private Integer aula_id;
-	private Double nota;
+	private Integer nota;
 	private String comentario;
 	private String origem; // se a nota veio de um professor ou de um aluno
 	
@@ -13,14 +13,14 @@ public class Nota {
 		this(id,aluno_id,professor_id,null,null,null,null);
 	}
 	
-	public Nota(Integer id, Integer aluno_id, Integer professor_id, Integer aula_id, Double nota, String comentario, String origem) {
+	public Nota(Integer id, Integer aluno_id, Integer professor_id, Integer aula_id, Integer nota, String comentario, String origem) {
 		this.id = id;
 		this.aluno_id = aluno_id;
 		this.professor_id = professor_id;
 		this.aula_id = aula_id;
 		this.nota = nota;
 		this.comentario = comentario;
-		this.origem = origem;
+		this.setOrigem(origem);;
 	}
 	
 	public void setId(Integer id) {
@@ -39,7 +39,7 @@ public class Nota {
 		this.aula_id = aulaId;
 	}
 	
-	public void setNota(Double nota) {
+	public void setNota(Integer nota) {
 		this.nota = nota;
 	}
 	
@@ -63,7 +63,7 @@ public class Nota {
 		return aula_id;
 	}
 	
-	public Double getNota() {
+	public Integer getNota() {
 		return nota;
 	}
 	
@@ -76,7 +76,11 @@ public class Nota {
 	}
 
 	public void setOrigem(String origem) {
-		this.origem = origem;
+		if(origem.equals("aluno") || origem.equals("professor")) {			
+			this.origem = origem;
+		}else {
+			System.out.println("O remetente tem que ser um professor ou um aluno");
+		}
 	}
 	
 }
