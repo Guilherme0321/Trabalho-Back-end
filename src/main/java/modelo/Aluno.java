@@ -2,12 +2,16 @@ package modelo;
 
 import java.time.LocalDate;
 
-public class Aluno {
+public class Aluno implements User{
 	private Integer id;
 	private String nome;
 	private String email;
 	private String senha;
 	private LocalDate data_cadastro;
+	
+	public Aluno(String email, String senha) { // construtor para o login
+		this(null,null,email,senha);
+	}
 	
 	public Aluno(Integer id,String nome, String email, String senha) {
 		this(id,nome, email, senha, null);
@@ -41,7 +45,10 @@ public class Aluno {
 	/* public void setSenha(String senha) {
 		this.senha = senha;
 	} */
-	public LocalDate getData() {
+	public LocalDate getData_cadastro() {
 		return data_cadastro;
+	}
+	public String getTipo_user() {
+		 return "aluno";
 	}
 }

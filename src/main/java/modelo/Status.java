@@ -3,11 +3,11 @@ package modelo;
 public class Status {
 	private String status;
 	
-	public Status(String status) throws Exception {
+	public Status(String status){
 		if(status.equals("pendente") || status.equals("confirmada") || status.equals("cancelada")) {
 			this.setStatus(status);
 		}else {
-			throw new Exception("Somente 'pendente', 'confirmada', 'cancelada' sao aceitaveis");
+			System.out.println("Somente 'pendente', 'confirmada', 'cancelada' sao aceitaveis");
 		}
 	}
 

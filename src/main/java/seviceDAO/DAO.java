@@ -27,36 +27,15 @@ public class DAO {
 		}
 	}
 	
-	public void addAluno(Aluno aluno) {
-		String sql = "INSERT INTO users (id, nome, email, senha, data_cadastro, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)";
+	public void addUser(User user)  {
+		String sql = "INSERT INTO users (nome, email, senha, data_cadastro, tipo_usuario) VALUES (?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement statemente = con.prepareStatement(sql);
-			statemente.setInt(1, aluno.getId());
-			statemente.setString(2, aluno.getNome());
-			statemente.setString(3,aluno.getEmail());
-			statemente.setString(4,aluno.getSenha());
-			statemente.setDate(5,Date.valueOf(aluno.getData()));
-			statemente.setString(6,"aluno");
-			
-			statemente.executeUpdate();
-			statemente.close();
-            System.out.println("Registro adicionado");
-
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void addAluno(Professor teacher) {
-		String sql = "INSERT INTO users (id, nome, email, senha, data_cadastro, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)";
-		try {
-			PreparedStatement statemente = con.prepareStatement(sql);
-			statemente.setInt(1, teacher.getId());
-			statemente.setString(2, teacher.getNome());
-			statemente.setString(3,teacher.getEmail());
-			statemente.setString(4,teacher.getSenha());
-			statemente.setDate(5,Date.valueOf(teacher.getData()));
-			statemente.setString(6,"professor");
+			statemente.setString(1, user.getNome());
+			statemente.setString(2,user.getEmail());
+			statemente.setString(3,user.getSenha());
+			statemente.setDate(4,Date.valueOf(user.getData_cadastro()));
+			statemente.setString(5,user.getTipo_user());
 			
 			statemente.executeUpdate();
 			statemente.close();
@@ -68,19 +47,18 @@ public class DAO {
 	}
 	
 	public void addAula(Aula aula) {
-		String sql = "INSERT INTO aula (id,id_professor,id_aluno,titulo,descricao,preco,data_aula,data_criacao,local_aula,link_aula) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO aula (id_professor, id_aluno,titulo, descricao, preco, data_aula, data_criacao, local_aula, link_aula) VALUES (?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement statemente = con.prepareStatement(sql);
-			statemente.setInt(1, aula.getId());
-			statemente.setInt(2,aula.getProfessorId());
-			statemente.setInt(3,aula.getAluno_id());
-			statemente.setString(4,aula.getMateria());
-			statemente.setString(5,aula.getDescricao());
-			statemente.setDouble(6, aula.getPreco());
-			statemente.setTimestamp(7, Timestamp.valueOf(aula.getDisponibilidade()));
-			statemente.setDate(8, Date.valueOf(aula.getDataCriacao()));
-			statemente.setString(9,aula.getTipo_aula());
-			statemente.setString(10,aula.getLink_aula());
+			statemente.setInt(1,aula.getProfessorId());
+			statemente.setInt(2,aula.getAluno_id());
+			statemente.setString(3,aula.getMateria());
+			statemente.setString(4,aula.getDescricao());
+			statemente.setDouble(5, aula.getPreco());
+			statemente.setTimestamp(6, Timestamp.valueOf(aula.getDisponibilidade()));
+			statemente.setDate(7, Date.valueOf(aula.getDataCriacao()));
+			statemente.setString(8,aula.getTipo_aula());
+			statemente.setString(9,aula.getLink_aula());
 			
 			statemente.executeUpdate();
 			statemente.close();
@@ -91,14 +69,13 @@ public class DAO {
 	}
 	
 	public void addReserva(Reserva reserva) {
-		String sql = "INSERT INTO aula (id,id_aluno,id_aula,data_reserva,status) values (?,?,?,?,?)";
+		String sql = "INSERT INTO reserva (id_aluno, id_aula, data_reserva, status) values (?,?,?,?)";
 		try {
 			PreparedStatement statemente = con.prepareStatement(sql);
-			statemente.setInt(1,reserva.getId());
-			statemente.setInt(2,reserva.getAluno_id());
-			statemente.setInt(3,reserva.getAula_id());
-			statemente.setTimestamp(4,Timestamp.valueOf(reserva.getData()));
-			statemente.setString(5,reserva.getStatus().getStatus());
+			statemente.setInt(1,reserva.getAluno_id());
+			statemente.setInt(2,reserva.getAula_id());
+			statemente.setTimestamp(3,Timestamp.valueOf(reserva.getData()));
+			statemente.setString(4,reserva.getStatus().getStatus());
 			
 			statemente.executeUpdate();
 			statemente.close();
@@ -109,16 +86,15 @@ public class DAO {
 	}
 	
 	public void addNota(Nota nota) {
-		String sql = "INSERT INTO nota (id,id_professor,id_aluno,id_aula,nota,comentario,origem) VALUES (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO nota (id_professor, id_aluno, id_aula, nota, comentario, origem) VALUES (?,?,?,?,?,?)";
 		try {
 			PreparedStatement statement = con.prepareStatement(sql);
-			statement.setInt(1,nota.getId());
-			statement.setInt(2,nota.getProfessorId());
-			statement.setInt(3, nota.getAlunoId());
-			statement.setInt(4, nota.getAulaId());
-			statement.setInt(5,nota.getNota());
-			statement.setString(6,nota.getComentario());
-			statement.setString(7,nota.getOrigem());
+			statement.setInt(1,nota.getProfessorId());
+			statement.setInt(2, nota.getAlunoId());
+			statement.setInt(3, nota.getAulaId());
+			statement.setInt(4,nota.getNota());
+			statement.setString(5,nota.getComentario());
+			statement.setString(6,nota.getOrigem());
 			
 			statement.executeUpdate();
 			statement.close();
@@ -154,11 +130,16 @@ public class DAO {
         return teachers;
 	}
 	
-	public ArrayList<Aula> listAulas(Integer user_id){
+	public ArrayList<Aula> listAulasTOaluno(User user){
 		ArrayList<Aula> aulas = new ArrayList<Aula>();
 		try {
 			Statement statement = con.createStatement();
-			String query = "SELECT * FROM aula WHERE id_aluno = " + user_id;
+			String query = null;
+			if(user.getTipo_user().equals("professor")) {
+				query = "SELECT * FROM aula WHERE id_professor = " + user.getId();
+			}else {
+				query = "SELECT * FROM aula WHERE id_aluno = " + user.getId();
+			}
 			ResultSet result = statement.executeQuery(query);
 			while(result.next()) {
 				Integer id = result.getInt("id");
@@ -182,5 +163,57 @@ public class DAO {
 			e.printStackTrace();
 		}
 		return aulas;
+	}
+
+	public User validarDados(User user) {
+		User userl = null;
+		try {
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ? AND tipo_usuario = ?");
+            stmt.setString(1, user.getEmail());
+            stmt.setString(2, user.getSenha());
+            stmt.setString(3, user.getTipo_user());
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                	Integer id = rs.getInt("id");
+                	String nome = rs.getString("nome");
+                	String email = rs.getString("email");
+                	String senha = rs.getString("senha");
+                	LocalDate data = rs.getDate("data_cadastro").toLocalDate();
+                	if(user.getTipo_user().equals("professor")) {
+                		userl = new Professor(id, nome, email, senha, data);
+                	}else {
+                		userl = new Aluno(id, nome, email, senha, data);
+                	}
+                }
+            }
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return userl;
+	}
+	
+	public static void main(String[] args) {
+		//DAO dao = new DAO();
+		//Aluno aluno = new Aluno(4, "JoãoEED667", "jalkdçajkdl@email.com", "senha123", LocalDate.now());
+		//Professor professor = new Professor(5, "Mar77RRia", "ljaçklsdf@eRRFFDmail.com", "senha456", LocalDate.now());
+		//Aula aula = new Aula(4, 5, 4, "Matemática", "Aula de álgebra", 50.0, LocalDateTime.now(), LocalDate.now(), "virtual", "www.algo");
+		//Status status = new Status("confirmada");
+		//Reserva reserva = new Reserva(1, 4, 4, LocalDateTime.now(), status);
+		//Nota nota = new Nota(1, 4, 5, 4, 9, "Muito bom!", "professor");
+		
+		//dao.addUser(aluno);
+		//dao.addUser(professor);
+		//dao.addAula(aula);
+		//dao.addReserva(reserva);
+		//dao.addNota(nota);
+		//ArrayList<Professor> profs = dao.listProfessores();
+		//for(Professor prof : profs) {
+		//	System.out.println(prof.getNome());
+		//}
+		//ArrayList<Aula> aulas = dao.listAulasTOaluno(5);
+		//for(Aula aula : aulas) {
+		//	System.out.println("-" + aula.getMateria());
+		//}
 	}
 }
