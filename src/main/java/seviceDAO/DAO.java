@@ -130,7 +130,7 @@ public class DAO {
         return teachers;
 	}
 	
-	public ArrayList<Aula> listAulasTOaluno(User user){
+	public ArrayList<Aula> listAulas(User user){
 		ArrayList<Aula> aulas = new ArrayList<Aula>();
 		try {
 			Statement statement = con.createStatement();
@@ -194,26 +194,26 @@ public class DAO {
 	}
 	
 	public static void main(String[] args) {
-		//DAO dao = new DAO();
-		//Aluno aluno = new Aluno(4, "JoãoEED667", "jalkdçajkdl@email.com", "senha123", LocalDate.now());
-		//Professor professor = new Professor(5, "Mar77RRia", "ljaçklsdf@eRRFFDmail.com", "senha456", LocalDate.now());
-		//Aula aula = new Aula(4, 5, 4, "Matemática", "Aula de álgebra", 50.0, LocalDateTime.now(), LocalDate.now(), "virtual", "www.algo");
-		//Status status = new Status("confirmada");
-		//Reserva reserva = new Reserva(1, 4, 4, LocalDateTime.now(), status);
-		//Nota nota = new Nota(1, 4, 5, 4, 9, "Muito bom!", "professor");
+		DAO dao = new DAO();
+		Aluno aluno = new Aluno(6, "AAAA7", "alfgo?@email.com", "senha123", LocalDate.now());
+		Professor professor = new Professor(7, "Maris", "ljaçkflsdfff@eRRFFDmail.com", "senha456", LocalDate.now());
+		Aula aula = new Aula(4, 5, 4, "AED2", "Aula de algoritimo estrutura de dados", 50.0, LocalDateTime.now(), LocalDate.now(), "virtual", "www.algo");
+		Status status = new Status("confirmada");
+		Reserva reserva = new Reserva(1, 4, 4, LocalDateTime.now(), status);
+		Nota nota = new Nota(1, 4, 5, 4, 9, "Muito bom!", "professor");
 		
-		//dao.addUser(aluno);
-		//dao.addUser(professor);
-		//dao.addAula(aula);
-		//dao.addReserva(reserva);
-		//dao.addNota(nota);
-		//ArrayList<Professor> profs = dao.listProfessores();
-		//for(Professor prof : profs) {
-		//	System.out.println(prof.getNome());
-		//}
-		//ArrayList<Aula> aulas = dao.listAulasTOaluno(5);
-		//for(Aula aula : aulas) {
-		//	System.out.println("-" + aula.getMateria());
-		//}
+		dao.addUser(aluno);
+		dao.addUser(professor);
+		dao.addAula(aula);
+		dao.addReserva(reserva);
+		dao.addNota(nota);
+		ArrayList<Professor> profs = dao.listProfessores();
+		for(Professor prof : profs) {
+			System.out.println(prof.getNome());
+		}
+		ArrayList<Aula> aulas = dao.listAulas(aluno);
+		for(Aula aula1 : aulas) {
+			System.out.println("-" + aula1.getMateria());
+		}
 	}
 }
