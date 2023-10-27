@@ -17,3 +17,12 @@ const chatWindow = document.getElementById('chat-window');
         chatWindow.innerHTML += `<p>Chat bot: ${message}</p>`;
       }, 1000);
     }
+    
+   document.addEventListener("DOMContentLoaded", function() {
+  let acesso = localStorage.getItem('acesso');
+  acesso = JSON.parse(acesso);
+
+  if (acesso == null && !window.location.href.endsWith("login.html")) {
+    window.open("login.html", "_self");
+  }
+});

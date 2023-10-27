@@ -1,5 +1,8 @@
 package seviceDAO;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,14 +12,15 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import modelo.*;
 
-public class DAO {
+public class Dao {
 	private Connection con;
 	
-	public DAO() {		
+	public Dao() {		
 		String url = "jdbc:postgresql://ti2.postgres.database.azure.com/postgres";
 		String user = "bruno";
 		String senha = "Admin123";
@@ -27,13 +31,19 @@ public class DAO {
 		}
 	}
 	
-	public void addUser(User user)  {
+	public String[] addUser(User user) throws NoSuchAlgorithmException  {
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(user.getSenha().getBytes(), 0, user.getSenha().length());
+		String senha = new BigInteger(1,md.digest()).toString(16);
+		
 		String sql = "INSERT INTO users (nome, email, senha, data_cadastro, tipo_usuario) VALUES (?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement statemente = con.prepareStatement(sql);
 			statemente.setString(1, user.getNome());
 			statemente.setString(2,user.getEmail());
-			statemente.setString(3,user.getSenha());
+			
+			
+			statemente.setString(3,senha);
 			statemente.setDate(4,Date.valueOf(user.getData_cadastro()));
 			statemente.setString(5,user.getTipo_user());
 			
@@ -44,6 +54,10 @@ public class DAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+
+		return validarDados(user.getEmail(),user.getSenha());
+		
 	}
 	
 	public void addAula(Aula aula) {
@@ -165,55 +179,58 @@ public class DAO {
 		return aulas;
 	}
 
-	public User validarDados(User user) {
-		User userl = null;
+	public String[] validarDados(String email, String senha) throws NoSuchAlgorithmException {
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(senha.getBytes(), 0, senha.length());
+		String password = new BigInteger(1,md.digest()).toString(16);
+		String[] dados = new String[3];
+		System.out.println("" + password);
 		try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ? AND tipo_usuario = ?");
-            stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getSenha());
-            stmt.setString(3, user.getTipo_user());
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ?");
+            stmt.setString(1, email);
+            stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                 	Integer id = rs.getInt("id");
                 	String nome = rs.getString("nome");
-                	String email = rs.getString("email");
-                	String senha = rs.getString("senha");
-                	LocalDate data = rs.getDate("data_cadastro").toLocalDate();
-                	if(user.getTipo_user().equals("professor")) {
-                		userl = new Professor(id, nome, email, senha, data);
-                	}else {
-                		userl = new Aluno(id, nome, email, senha, data);
-                	}
+                	String tipo = rs.getString("tipo_usuario");
+                	dados[0] = id + "";
+                	dados[1] = nome;
+                	dados[2] = tipo;
                 }
             }
             stmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-		return userl;
+		return dados;
+	}
+	
+	public void close() throws SQLException {
+		con.close();
 	}
 	
 	public static void main(String[] args) {
-		DAO dao = new DAO();
-		Aluno aluno = new Aluno(6, "AAAA7", "alfgo?@email.com", "senha123", LocalDate.now());
-		Professor professor = new Professor(7, "Maris", "ljaçkflsdfff@eRRFFDmail.com", "senha456", LocalDate.now());
-		Aula aula = new Aula(4, 5, 4, "AED2", "Aula de algoritimo estrutura de dados", 50.0, LocalDateTime.now(), LocalDate.now(), "virtual", "www.algo");
+		Dao dao = new Dao();
+		Aluno aluno = new Aluno(5, "AAAAfff7", "alfggggo?@email.com", "senha123", LocalDate.now());
+		Professor professor = new Professor(null, "Mariggs", "ljaggçkflsdfff@eRRFFDmail.com", "senha456", LocalDate.now());
+		Aula aula = new Aula(null, 5, 4, "AEgD2", "Aulag de algoritimo estrutura de dados", 50.0, LocalDateTime.now(), LocalDate.now(), "virtual", "www.algo");
 		Status status = new Status("confirmada");
-		Reserva reserva = new Reserva(1, 4, 4, LocalDateTime.now(), status);
-		Nota nota = new Nota(1, 4, 5, 4, 9, "Muito bom!", "professor");
+		Reserva reserva = new Reserva(null, 4, 4, LocalDateTime.now(), status);
+		Nota nota = new Nota(null, 4, 5, 4, 9, "Muito bom!", "professor");
 		
-		dao.addUser(aluno);
-		dao.addUser(professor);
-		dao.addAula(aula);
-		dao.addReserva(reserva);
-		dao.addNota(nota);
-		ArrayList<Professor> profs = dao.listProfessores();
-		for(Professor prof : profs) {
-			System.out.println(prof.getNome());
-		}
-		ArrayList<Aula> aulas = dao.listAulas(aluno);
-		for(Aula aula1 : aulas) {
-			System.out.println("-" + aula1.getMateria());
-		}
+		//dao.addUser(aluno);
+		//dao.addUser(professor);
+		//dao.addAula(aula);
+		//dao.addReserva(reserva);
+		//dao.addNota(nota);
+		//ArrayList<Professor> profs = dao.listProfessores();
+		//for(Professor prof : profs) {
+		//	System.out.println(prof.getNome());
+		//}
+		//ArrayList<Aula> aulas = dao.listAulas(aluno);
+		//for(Aula aula1 : aulas) {
+		//	System.out.println("-" + aula1.getMateria());
+		//}
 	}
 }
