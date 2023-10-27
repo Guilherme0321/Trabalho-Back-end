@@ -176,6 +176,19 @@ public class Dao {
 		}
 		return aulas;
 	}
+	
+	public boolean deleteAula(Aula aula) {
+		boolean deleted = false;
+		try {
+			Statement statment = con.createStatement();
+			String query = "DELETE FROM aula WHERE id = " + aula.getId();
+			statment.executeQuery(query);
+			deleted = true;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return deleted;
+	}
 
 	public String[] validarDados(String email, String senha) throws NoSuchAlgorithmException {
 		MessageDigest md = MessageDigest.getInstance("MD5");
@@ -203,41 +216,67 @@ public class Dao {
 		return dados;
 	}
 	
+	public boolean updateReserva(Reserva reserva) {
+		String sql = "UPDATE reserva SET status = ? WHERE id = ?";
+		boolean enviado = false;
+		try(PreparedStatement statement = con.prepareStatement(sql)) {
+			statement.setString(1, reserva.getStatus().getStatus());
+			statement.setInt(2, reserva.getId());
+			statement.execute();
+			enviado = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return enviado;
+	}
+	
 	public void close() throws SQLException {
 		con.close();
 	}
 	
-	public static void main(String[] args) {
-		Dao dao = new Dao();
-		Aluno aluno = new Aluno(5, "AAAAfff7", "alfggggffgeeego44?@email.com", "senha123", LocalDate.now());
-		Professor professor = new Professor(null, "Mariggs", "lj55ggeffeeaggçkflsdfff@eRRFFDmail.com", "senha456", LocalDate.now());
-		Aula aula = new Aula(null, 5, 4, "AEgD2", "Aulag de algoritimo estrutura de dados", 50.0, LocalDateTime.now(), LocalDate.now(), "online", "www.algo");
-		Status status = new Status("confirmada");
-		Reserva reserva = new Reserva(null, 5, 5, LocalDateTime.now(), status);
-		Nota nota = new Nota(null, 5, 5, 5, 9, "Muito bom!", "professor");
-		
+	public ArrayList<Reserva> listReservas(Aluno aluno) {
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		try {
-			dao.addUser(aluno);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			Statement statment = con.createStatement();
+			String query = "SELECT * FROM reserva WHERE status = 'pendente' AND id_aluno = " + aluno.getId();
+			ResultSet resul = statment.executeQuery(query);
+			while(resul.next()) {
+				Integer id = resul.getInt("id");
+				Integer id_aluno = resul.getInt("id_aluno");
+				Integer id_aula = resul.getInt("id_aula");
+				LocalDateTime data = resul.getTimestamp("data_reserva").toLocalDateTime();
+				Status status = new Status(resul.getString("status"));
+				Reserva reserva = new Reserva(id,id_aluno,id_aula,data,status);
+				reservas.add(reserva);
+			}
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		return reservas;
+	}
+	
+	public ArrayList<Reserva> listReservas(ArrayList<Aula> aulas) {
+		String test = "(";
+		for (int i = 0; i < aulas.size(); i++) {
+		    test += (i == aulas.size() - 1) ? aulas.get(i).getId() + ")" : aulas.get(i).getId() + ",";
+		}
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 		try {
-			dao.addUser(professor);
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			Statement statment = con.createStatement();
+			String query = "SELECT * FROM reserva WHERE status = 'pendente' AND id_aula in " + test;
+			ResultSet resul = statment.executeQuery(query);
+			while(resul.next()) {
+				Integer id = resul.getInt("id");
+				Integer id_aluno = resul.getInt("id_aluno");
+				Integer id_aula = resul.getInt("id_aula");
+				LocalDateTime data = resul.getTimestamp("data_reserva").toLocalDateTime();
+				Status status = new Status(resul.getString("status"));
+				Reserva reserva = new Reserva(id,id_aluno,id_aula,data,status);
+				reservas.add(reserva);
+			}
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		dao.addAula(aula);
-		dao.addReserva(reserva);
-		dao.addNota(nota);
-		ArrayList<Professor> profs = dao.listProfessores();
-		for(Professor prof : profs) {
-			System.out.println(prof.getNome());
-		}
-		ArrayList<Aula> aulas = dao.listAulas(aluno);
-		for(Aula aula1 : aulas) {
-			System.out.println("-" + aula1.getMateria());
-		}
+		return reservas;
 	}
 }

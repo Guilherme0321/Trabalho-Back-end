@@ -9,6 +9,10 @@ public class Reserva {
 	private LocalDateTime data;
 	private Status status;
 	
+	public Reserva(Integer id, Status status) {
+		this(id,null,null,null,status);
+	}
+	
 	public Reserva(Integer id, Integer aluno_id, Integer aula_id, LocalDateTime data, Status status) {
 		this.id = id;
 		this.aluno_id = aluno_id;

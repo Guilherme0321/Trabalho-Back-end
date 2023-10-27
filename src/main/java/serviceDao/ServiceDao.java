@@ -5,9 +5,13 @@ import spark.Response;
 import modelo.*;
 
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import dao.Dao;
 
@@ -25,7 +29,12 @@ public class ServiceDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		try {
+			dao.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    res.type("application/json");
 	    return "{ \"id\": " + dados[0] + ", \"nome\": \"" + dados[1] + "\", \"tipo\": \"" + dados[2] + "\" }";
 	}
@@ -48,15 +57,18 @@ public class ServiceDao {
 	    
 	    Dao dao = new Dao();
 	    String[] dados = null;
-	    if(user == null) {	
-	    	System.out.println("User é null");
-	    }else {
-	    	try {
-				dados = dao.addUser(user);
-			} catch (NoSuchAlgorithmException e) {
-				e.printStackTrace();
-			}
-	    }		    
+	    
+    	try {
+			dados = dao.addUser(user);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+    	try {
+			dao.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    return "{ \"id\": " + dados[0] + ", \"nome\": \"" + dados[1] + "\", \"tipo\": \"" + dados[2] + "\" }";
 	}
 	
@@ -81,6 +93,84 @@ public class ServiceDao {
 	    jsonBuilder.append("]");
 
 	    res.type("application/json");
+	    try {
+			dao.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    return jsonBuilder.toString();
+	}
+	
+	public static String listReserva(Request req, Response res) {
+		Dao dao = new Dao();
+		Integer id_user = Integer.parseInt(req.queryParams("id"));
+		String tipo = req.queryParams("tipo");
+		
+		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+		
+		if(tipo.equals("professor")) {
+			Professor prof = new Professor(id_user, null, null, tipo);
+			ArrayList<Aula> aulas_do_usuario = dao.listAulas(prof);
+			reservas = dao.listReservas(aulas_do_usuario);
+		}else if(tipo.equals("aluno")){
+			Aluno usuario = new Aluno(id_user, null, null, tipo);
+			reservas = dao.listReservas(usuario);
+		}
+		
+		
+		StringBuilder jsonBuilder = new StringBuilder();
+	    
+	    jsonBuilder.append("[");
+	    for (int i = 0; i < reservas.size(); i++) {
+	        Reserva reserva = reservas.get(i);
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        String data = reserva.getData().format(formatter);
+	        jsonBuilder.append("{");
+	        jsonBuilder.append("\"id\":" + reserva.getId() + ",");
+	        jsonBuilder.append("\"id_aluno\":\"" + reserva.getAluno_id() + "\",");
+	        jsonBuilder.append("\"id_aula\":\"" + reserva.getAula_id() + "\",");
+	        jsonBuilder.append("\"data\":\"" + data + "\",");
+	        jsonBuilder.append("\"status\":\"" + reserva.getStatus().getStatus() + "\"");
+	        jsonBuilder.append("}");
+
+	        if (i < reservas.size() - 1) {
+	            jsonBuilder.append(",");
+	        }
+	    }
+	    jsonBuilder.append("]");
+
+	    res.type("application/json");
+	    try {
+			dao.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    return jsonBuilder.toString();
+	}
+	
+	public static boolean updateStatus(Request req) {
+		Dao dao = new Dao();
+		Gson gson = new Gson();
+		JsonObject jsonData = gson.fromJson(req.body(), JsonObject.class);
+		Integer id = Integer.parseInt(jsonData.get("id").getAsString());
+		Integer id_aula = Integer.parseInt(jsonData.get("id_aula").getAsString());
+		Status status = new Status(jsonData.get("status").getAsString());
+		boolean atualizado = false;
+		Reserva temp_reserva = new Reserva(id, status);
+		atualizado = dao.updateReserva(temp_reserva);			
+		if(status.getStatus().equals("cancelada")) {
+			Aula aula = new Aula(id_aula, null, null, null, null, null, null, null, null, null);
+			dao.deleteAula(aula);
+		}
+		
+		try {
+			dao.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return atualizado;
 	}
 }

@@ -10,7 +10,7 @@ document.querySelector("#form").addEventListener('submit', (e) => {
         tipo = 'aluno';
     }
 
-    if (/^[a-zA-Z]+$/.test(name.value)) {
+    if (name.value != '') { ///^[a-zA-Z]+$/.test(name.value)
         var xml = new XMLHttpRequest();
 
         xml.open("POST", "/usuario", true);

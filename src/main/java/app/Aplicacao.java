@@ -14,10 +14,12 @@ class Aplicacao {
 		
 		get("/user", (req, res) -> ServiceDao.validar(req, res) );
 		
+		get("/professores", (req,res) -> ServiceDao.listProfessores(res));
+		
+		get("/reservas", (req,res) -> ServiceDao.listReserva(req,res));
+
 		post("/usuario", (req, res) -> ServiceDao.cadastrar(req) );
 		
-		get("/professores", (req,res) -> ServiceDao.listProfessores(res));
-
-
+		post("/updateStatus", (req, res) -> ServiceDao.updateStatus(req));
 	}
 }

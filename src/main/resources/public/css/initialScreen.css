@@ -67,3 +67,7 @@ footer {
     height: 260px;
 }
 
+img.tableIcon {
+    height: 3vh;
+    cursor: pointer;
+}
