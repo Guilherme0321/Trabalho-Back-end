@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/cadastrarAula.css">
+</head>
+
+<body>
+    <nav class="navBAR">
+        <ul class="list">
+            <li class="li"><a href="./index.html">Home</a></li>
+            <li class="li"><a href=./chatbot.html>ChatBot</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Cadastrar Aula</h1>
+        <form id="form" class="form-container">
+            <div class="input-group">
+                <label for="Professor">
+                    <span>Professor</span>
+                    <input type="text" id="Professor" name="Professor" required>
+                </label>
+    
+                <label for="Aluno">
+                    <span>Aluno</span>
+                    <input type="text" id="Aluno" name="Aluno" required>
+                </label>
+            </div>
+    
+            <div class="input-group">
+                <label for="Titulo">
+                    <span>Título</span>
+                    <input type="text" id="Titulo" name="Titulo" required>
+                </label>
+    
+                <label for="Descricao">
+                    <span>Descrição</span>
+                    <input type="text" id="Descricao" name="Descricao" required>
+                </label>
+            </div>
+    
+            <div class="input-group">
+                <label for="Preco">
+                    <span>Preço</span>
+                    <input type="number" id="Preco" name="Preco" required>
+                </label>
+    
+                <label for="DataDisponivel">
+                    <span>Data Disponível</span>
+                    <input type="datetime-local" id="DataDisponivel" name="DataDisponivel" required>
+                </label>
+            </div>
+    
+            <div class="input-group">
+                <label for="TipoDeAula">
+                    <span>Tipo de Aula</span>
+                    <input type="text" id="TipoDeAula" name="TipoDeAula" required>
+                </label>
+    
+                <label for="LinkAula">
+                    <span>Link da Aula</span>
+                    <input type="url" id="LinkAula" name="LinkAula" required>
+                </label>
+            </div>
+    
+            <input type="submit" value="Inscrever-se">
+        </form>
+    </main>
+    
+
+    <script src="./js/cadastrarAula.js"></script>
+</body>
+
+</html>

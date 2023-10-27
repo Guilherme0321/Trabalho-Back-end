@@ -1,4 +1,4 @@
-package seviceDAO;
+package dao;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -129,10 +129,8 @@ public class Dao {
             	Integer id = resultSet.getInt("id");
             	String nome = resultSet.getString("nome");
             	String email = resultSet.getString("email");
-            	String senha = resultSet.getString("senha");
-            	LocalDate data = resultSet.getDate("data_cadastro").toLocalDate();
             	
-                Professor teacher = new Professor(id,nome,email,senha,data);
+                Professor teacher = new Professor(id,nome,email,null,null);
                 teachers.add(teacher);
             }
 
@@ -184,7 +182,6 @@ public class Dao {
 		md.update(senha.getBytes(), 0, senha.length());
 		String password = new BigInteger(1,md.digest()).toString(16);
 		String[] dados = new String[3];
-		System.out.println("" + password);
 		try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE email = ? AND senha = ?");
             stmt.setString(1, email);
@@ -212,25 +209,35 @@ public class Dao {
 	
 	public static void main(String[] args) {
 		Dao dao = new Dao();
-		Aluno aluno = new Aluno(5, "AAAAfff7", "alfggggo?@email.com", "senha123", LocalDate.now());
-		Professor professor = new Professor(null, "Mariggs", "ljaggçkflsdfff@eRRFFDmail.com", "senha456", LocalDate.now());
-		Aula aula = new Aula(null, 5, 4, "AEgD2", "Aulag de algoritimo estrutura de dados", 50.0, LocalDateTime.now(), LocalDate.now(), "virtual", "www.algo");
+		Aluno aluno = new Aluno(5, "AAAAfff7", "alfggggffgeeego44?@email.com", "senha123", LocalDate.now());
+		Professor professor = new Professor(null, "Mariggs", "lj55ggeffeeaggçkflsdfff@eRRFFDmail.com", "senha456", LocalDate.now());
+		Aula aula = new Aula(null, 5, 4, "AEgD2", "Aulag de algoritimo estrutura de dados", 50.0, LocalDateTime.now(), LocalDate.now(), "online", "www.algo");
 		Status status = new Status("confirmada");
-		Reserva reserva = new Reserva(null, 4, 4, LocalDateTime.now(), status);
-		Nota nota = new Nota(null, 4, 5, 4, 9, "Muito bom!", "professor");
+		Reserva reserva = new Reserva(null, 5, 5, LocalDateTime.now(), status);
+		Nota nota = new Nota(null, 5, 5, 5, 9, "Muito bom!", "professor");
 		
-		//dao.addUser(aluno);
-		//dao.addUser(professor);
-		//dao.addAula(aula);
-		//dao.addReserva(reserva);
-		//dao.addNota(nota);
-		//ArrayList<Professor> profs = dao.listProfessores();
-		//for(Professor prof : profs) {
-		//	System.out.println(prof.getNome());
-		//}
-		//ArrayList<Aula> aulas = dao.listAulas(aluno);
-		//for(Aula aula1 : aulas) {
-		//	System.out.println("-" + aula1.getMateria());
-		//}
+		try {
+			dao.addUser(aluno);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			dao.addUser(professor);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dao.addAula(aula);
+		dao.addReserva(reserva);
+		dao.addNota(nota);
+		ArrayList<Professor> profs = dao.listProfessores();
+		for(Professor prof : profs) {
+			System.out.println(prof.getNome());
+		}
+		ArrayList<Aula> aulas = dao.listAulas(aluno);
+		for(Aula aula1 : aulas) {
+			System.out.println("-" + aula1.getMateria());
+		}
 	}
 }

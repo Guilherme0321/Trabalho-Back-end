@@ -4,9 +4,9 @@ document.querySelector("#form").addEventListener('submit', (e) => {
     let email = document.querySelector("#Email").value;
     let senha = document.querySelector("#Senha").value;
     let tipo;
-    if (document.querySelector("#Professor").checked == true) {
+    if (!document.querySelector("#Professor").checked == true) {
         tipo = 'professor';
-    } else if (document.querySelector("#Aluno").checked == true) {
+    } else if (!document.querySelector("#Aluno").checked == true) {
         tipo = 'aluno';
     }
 
@@ -24,7 +24,7 @@ document.querySelector("#form").addEventListener('submit', (e) => {
 				}else{
 	                localStorage.setItem('acesso', resposta);
 				}
-				document.querySelector("#form").submit();
+				document.querySelector("#form").submit()
             } else {
                 console.error("Erro na requisição: " + xml.status);
             }
@@ -35,4 +35,13 @@ document.querySelector("#form").addEventListener('submit', (e) => {
         name.placeholder = 'Nome Inválido!';
         name.value = '';
     }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  let acesso = localStorage.getItem('acesso');
+  acesso = JSON.parse(acesso);
+
+  if (acesso.id != null && acesso != null) {
+    window.open("index.html","_self");
+  }
 });

@@ -1,4 +1,3 @@
-
 document.querySelector("#form").addEventListener("submit", (e) => {
 	e.preventDefault();
 	let user = document.querySelector("#nome").value;
@@ -15,9 +14,19 @@ document.querySelector("#form").addEventListener("submit", (e) => {
         	localStorage.setItem('acesso', data);
 		}
 		document.querySelector("#form").submit();
+		
     })
     .catch(function(error) {
         console.error("Erro ao fazer login:", error);
     });
     
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  let acesso = localStorage.getItem('acesso');
+  acesso = JSON.parse(acesso);
+
+  if (acesso.id != null && acesso != null) {
+    window.open("index.html","_self");
+  }
 });

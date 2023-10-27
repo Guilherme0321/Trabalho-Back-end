@@ -5,11 +5,6 @@ if ((acesso == null || acesso.id == null) && !window.location.href.endsWith("log
 	window.open("login.html", "_self");
 }else{
 	if(acesso.tipo == 'aluno'){
-    	document.querySelector("#cadastrar_aula").remove();
-	}else{
-		document.querySelector("#listProf").remove();
-	}
+    document.querySelector("#cadastrar_aula").remove();
 }
-
-
-
+}
