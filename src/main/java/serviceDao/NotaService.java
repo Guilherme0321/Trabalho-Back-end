@@ -10,6 +10,17 @@ import modelo.Nota;
 
 public class NotaService {
 	
+	private static boolean contem(ArrayList<Aula> aulas, int aula_id) {
+		boolean constains = false;
+		for(int i = 0; i < aulas.size(); i++) {
+			if(aulas.get(i).getId() == aula_id) {
+				constains = true;
+				i = aulas.size();
+			}
+		}
+		return constains;
+	}
+	
 	private static float media(ArrayList<Nota> notas, int aula_id) {
 		float mediaNotas = 0;
 		int count = 0;
@@ -21,21 +32,24 @@ public class NotaService {
 		}
 		return mediaNotas / count;
 	}
- 	public static ArrayList<String> filterNotas(){
+	
+ 	public static ArrayList<String> filterNotas(String filter){
  		AulaDao aulaDao = new AulaDao();
  		NotaDao notaDao = new NotaDao();
  		UserDao userDao = new UserDao();
- 		
- 		ArrayList<Nota> notas = notaDao.list();
+ 		filter = filter.toUpperCase(); //  ARRUMAR O PROBLEMA DO FRONT MANDAR TUDO EM LOWER CASE
+ 		ArrayList<Nota> notas = notaDao.listBy(filter);
  		ArrayList<Aula> aulas = new ArrayList<>();
  		
  		for(Nota nota : notas) {
- 			Aula aula = aulaDao.searchFor(nota.getAulaId());
- 			aulas.add(aula);
+ 			if(!contem(aulas,nota.getAulaId())) { 				
+ 				Aula aula = aulaDao.searchFor(nota.getAulaId());
+ 				aulas.add(aula);
+ 			}
  		}
  	
  		ArrayList<String> integentSystemData = new ArrayList<String>();
- 		for(int i = 0; i < notas.size(); i++) {
+ 		for(int i = 0; i < aulas.size(); i++) {
  			int aula_id = notas.get(i).getAulaId();
  			int professor_id = aulas.get(i).getProfessorId();
  			String perfil = userDao.getProfessor(professor_id).getPerfil();
@@ -49,11 +63,4 @@ public class NotaService {
  		aulaDao.close();
  		return integentSystemData;
  	};
- 	
- 	public static void main(String[] args) {
- 		ArrayList<String> i = filterNotas();
- 		for(String x : i) {
- 			System.out.println(x);
- 		}
- 	}
 }

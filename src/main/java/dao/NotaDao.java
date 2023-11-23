@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import modelo.Nota;
+import modelo.*;
 
 public class NotaDao {
 	private Connection con;
@@ -48,9 +48,8 @@ public class NotaDao {
 		
 	}
 	
-	public ArrayList<Nota> list(){
+	private ArrayList<Nota> list(String sql){
 		ArrayList<Nota> notas = new ArrayList<Nota>();
-		String sql = "SELECT * FROM nota";
 		try {
 			Statement statement = con.createStatement();
 			ResultSet result = statement.executeQuery(sql);
@@ -71,11 +70,43 @@ public class NotaDao {
 		return notas;
 	}
 	
+	public ArrayList<Nota> list(){
+		return list("SELECT * FROM nota");
+	}
+	
+	public ArrayList<Nota> listBy(String x){
+		String sql = "SELECT * FROM nota WHERE id_aula in (SELECT id FROM aula WHERE titulo LIKE '%" + x + "%')";
+		return list(sql);
+	}
+	
 	public void close() {
 		try {
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void main(String[] args) {
+		NotaDao nota = new NotaDao();
+		AulaDao aula = new AulaDao();
+		ArrayList<Nota> notas = nota.listBy("A");
+		for(Nota n : notas) {
+			System.out.println(n.getAulaId());
+		}
+		
+		System.out.println();
+		ArrayList<Aula> aulas = new ArrayList<Aula>();
+		
+		for(Nota n : notas) {
+			aulas.add(aula.searchFor(n.getAulaId()));
+		}
+		
+		for(Aula n : aulas) {
+			System.out.println(n.getMateria() + " " + n.getDescricao() + " " + n.getId());
+		}
+		
+		aula.close();
+		nota.close();
 	}
 }

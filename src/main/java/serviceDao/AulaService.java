@@ -19,7 +19,7 @@ public class AulaService {
 		AulaDao auladao = new AulaDao();
 		JsonObject objectJson = json.fromJson(req.body(), JsonObject.class);
 		
-		Integer id = objectJson.get("id").getAsInt();
+		Integer id = objectJson.get("professor_id").getAsInt();
 		String titulo = objectJson.get("titulo").getAsString();
 		String descricao = objectJson.get("descricao").getAsString();
 		Double preco = objectJson.get("preco").getAsDouble();
@@ -41,11 +41,22 @@ public class AulaService {
 	public static String getAulas(Request req, Response res){
 		AulaDao dao = new AulaDao();
 		String text = req.queryParams("serach");
+		String id_user = req.queryParams("id_aluno");
 		
-		ArrayList<Aula> aulas = dao.listAulas(text);
-		for(Aula aula : aulas) {
-			System.out.println(aula.getMateria() + " " + aula.getDescricao());
+		System.out.println(id_user);
+		ArrayList<String> integentDataFilter = NotaService.filterNotas("a");
+		
+		for(String x : integentDataFilter) {
+			System.out.println(x); // printar
 		}
+		System.out.println();
+		System.out.println();
+		ArrayList<Aula> aulas = dao.listAulas(text);
+		
+		for(Aula aula : aulas) {
+			System.out.println(aula.getMateria() + " " + aula.getDescricao()); // pritnar
+		}
+		
 		StringBuilder jsonBuilder = new StringBuilder();
 	    jsonBuilder.append("[");
 	    for (int i = 0; i < aulas.size(); i++) {

@@ -156,8 +156,12 @@ i {
   color: #fff;
 }
 
+#link-aula, .endereco{
+  display: none;
+}
+
 .input-group {
-  width: 80%; /* Adjusted width */
+  width: 100%; /* Adjusted width */
   margin-bottom: 10px;
 }
 
@@ -254,11 +258,6 @@ a {
 
 h3 {
   color: black;
-}
-
-#form>div:nth-child(3) {
-  border-bottom: 0.25px #cbcbcb solid;
-  height: 7vh;
 }
 
 .card- {

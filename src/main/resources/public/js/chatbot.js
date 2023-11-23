@@ -1,3 +1,14 @@
+let acesso = localStorage.getItem('acesso');
+acesso = JSON.parse(acesso);
+
+if ((acesso == null || acesso.id == null) && !window.location.href.endsWith("login.html")) {
+	window.open("login.html", "_self");
+}else{
+	if(acesso.tipo == 'aluno'){
+    document.querySelector("#cadastrar_aula").remove();
+}
+}
+
 const chatWindow = document.getElementById('chat-window');
     const userInput = document.getElementById('user-input');
     const input_user = document.getElementById('user-input');
@@ -15,7 +26,7 @@ const chatWindow = document.getElementById('chat-window');
     
    function enviarRequisicao(){
 	   let x = document.querySelector("#user-input").value
-	   fetch("/listarAula?serach=" + x)
+	   fetch("/listarAula?serach=" + x + '&id_aluno=' + acesso.id)
 	   	.then(function(res){
 		return res.text();
 		})
