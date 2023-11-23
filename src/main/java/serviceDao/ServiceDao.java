@@ -5,15 +5,16 @@ import spark.Response;
 import modelo.*;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import dao.Dao;
+import dao.*;
+
 
 public class ServiceDao {
 	public static String validar(Request req, Response res) {
@@ -21,20 +22,14 @@ public class ServiceDao {
 	    String senha = req.queryParams("senha");
 	    
 	    
-	    Dao dao = new Dao();
+	    UserDao dao = new UserDao();
 	    String[] dados = null;
 		try {
 			dados = dao.validarDados(email,senha);
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			dao.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.close();
 	    res.type("application/json");
 	    return "{ \"id\": " + dados[0] + ", \"nome\": \"" + dados[1] + "\", \"tipo\": \"" + dados[2] + "\" }";
 	}
@@ -55,7 +50,7 @@ public class ServiceDao {
 	    	user = new Professor(null, nome, email, senha, data);
 	    }
 	    
-	    Dao dao = new Dao();
+	    UserDao dao = new UserDao();
 	    String[] dados = null;
 	    
     	try {
@@ -63,17 +58,13 @@ public class ServiceDao {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-    	try {
-			dao.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.close();
+
 	    return "{ \"id\": " + dados[0] + ", \"nome\": \"" + dados[1] + "\", \"tipo\": \"" + dados[2] + "\" }";
 	}
 	
 	public static String listProfessores(Response res) {
-		Dao dao = new Dao();
+		UserDao dao = new UserDao();
 		ArrayList<Professor> profs = dao.listProfessores();
 	    StringBuilder jsonBuilder = new StringBuilder();
 	    
@@ -93,17 +84,14 @@ public class ServiceDao {
 	    jsonBuilder.append("]");
 
 	    res.type("application/json");
-	    try {
-			dao.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.close();
+
 	    return jsonBuilder.toString();
 	}
 	
 	public static String listReserva(Request req, Response res) {
-		Dao dao = new Dao();
+		ReservaDao dao = new ReservaDao();
+		AulaDao auladao = new AulaDao();
 		Integer id_user = Integer.parseInt(req.queryParams("id"));
 		String tipo = req.queryParams("tipo");
 		
@@ -111,7 +99,7 @@ public class ServiceDao {
 		
 		if(tipo.equals("professor")) {
 			Professor prof = new Professor(id_user, null, null, tipo);
-			ArrayList<Aula> aulas_do_usuario = dao.listAulas(prof);
+			ArrayList<Aula> aulas_do_usuario = auladao.listAulas(prof);
 			reservas = dao.listReservas(aulas_do_usuario);
 		}else if(tipo.equals("aluno")){
 			Aluno usuario = new Aluno(id_user, null, null, tipo);
@@ -141,17 +129,14 @@ public class ServiceDao {
 	    jsonBuilder.append("]");
 
 	    res.type("application/json");
-	    try {
-			dao.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.close();
+		auladao.close();
 	    return jsonBuilder.toString();
 	}
 	
 	public static boolean updateStatus(Request req) {
-		Dao dao = new Dao();
+		ReservaDao dao = new ReservaDao();
+		AulaDao auladao = new AulaDao();
 		Gson gson = new Gson();
 		JsonObject jsonData = gson.fromJson(req.body(), JsonObject.class);
 		Integer id = Integer.parseInt(jsonData.get("id").getAsString());
@@ -161,16 +146,36 @@ public class ServiceDao {
 		Reserva temp_reserva = new Reserva(id, status);
 		atualizado = dao.updateReserva(temp_reserva);			
 		if(status.getStatus().equals("cancelada")) {
-			Aula aula = new Aula(id_aula, null, null, null, null, null, null, null, null, null);
-			dao.deleteAula(aula);
+			Aula aula = new Aula(id_aula, null, null, null, null, null, null, null, null);
+			auladao.deleteAula(aula);
 		}
 		
-		try {
-			dao.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		dao.close();
+		auladao.close();
 		return atualizado;
+	}
+
+	public static boolean cadastrarAula(Request req) {
+		Gson json = new Gson();
+		AulaDao auladao = new AulaDao();
+		JsonObject objectJson = json.fromJson(req.body(), JsonObject.class);
+		
+		Integer id = objectJson.get("id").getAsInt();
+		String titulo = objectJson.get("titulo").getAsString();
+		String descricao = objectJson.get("descricao").getAsString();
+		Double preco = objectJson.get("preco").getAsDouble();
+		String tempData = objectJson.get("data").getAsString();
+		
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+
+        LocalDateTime data = LocalDateTime.parse(tempData, formatter);
+        String tipo = objectJson.get("tipo").getAsString();
+        String local = objectJson.get("local").getAsString();
+		
+        Aula aula = new Aula(null, id, titulo, descricao, preco, data, LocalDate.now(), tipo, local);
+        
+        boolean wasSent = auladao.addAula(aula);
+		auladao.close();
+		return wasSent;
 	}
 }

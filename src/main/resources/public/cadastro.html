@@ -12,14 +12,97 @@
 </head>
 
 <body>
-    <nav class="navBAR">
-        <ul class="list">
-            <li class="li"><a href="./login.html">Login</a></li>
-
-        </ul>
-    </nav>
+   
     <main>
-        <h1>Crie sua Conta</h1>
+        <h1>Crie seu Usuário</h1>
+
+      <ul class="custom-list" onclick="window.location.href='./cadastro.html'; return false;">
+          <li class="li"><a>Cadastro</a></li>
+      </ul>
+
+
+    
+
+
+
+      <div class="d-flex justify-content-center h-100">
+          <div class="card-">
+              <div class="card-body">
+                  <form id="form">
+                      <div class="input-group space">
+                          <div class="input-group-prepend">
+                            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                              <path d="M12 3a4 4 0 1 0 0 8 4 4 0 1 0 0-8z"></path>
+                            </svg>
+                              <span class="input-group-text"><i class="fas fa-user"></i></span>
+                          </div>
+                        <input autocomplete="off" type="text" class="form-control" id="nome_completo" name="nome completo"
+                          placeholder="nome completo">
+                      </div>
+                      <div class="input-group space">
+                          <div class="input-group-prepend">
+                            <svg width="36" height="36" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                              <path d="m22 6-10 7L2 6"></path>
+                            </svg>
+                              <span class="input-group-text"><i class="fas fa-key"></i></span>
+                          </div>
+                        <input autocomplete="off" type="text" class="form-control" id="Email" name="Email"
+                          placeholder="Email">
+                      </div>
+                    <div class="input-group space">
+                        <div class="input-group-prepend">
+                          <svg width="36" height="36" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                          </svg>
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="senha" id="senha" name="senha">
+                    </div>
+
+                    <label for="Tipo de usuário">
+                        <span>Tipo de usuário</span>
+                        <div class="user-type">
+                            <label class="radio-option">
+                                Aluno
+                                <input type="radio" id="Aluno" value="Aluno" name="tipo_usuario">
+                            </label>
+                            <label class="radio-option">
+                                Professor
+                                <input type="radio" id="Professor" value="Professor" name="tipo_usuario">
+                            </label>
+                        </div>
+                    </label>
+
+
+                    
+                      <div class="space">
+                          <input type="submit" value="Inscrever-se" class="btn float-right login_btn" id="btn">
+                      </div>
+                    
+                     
+                    <ul class="list" onclick="window.location.href='./login.html'; return false;">
+                        <li class="li"><a>Login</a></li>
+                    </ul>
+                    </nav>
+                  </form>
+              </div>
+          </div>
+      </div>
+
+
+
+
+
+
+
+
+      
+
+
+<!--
+      
         <form id="form">
             <label for="Nome Completo">
                 <span>Nome Completo</span>
@@ -36,18 +119,28 @@
                 <input type="password" id="Senha" nome="Senha" required>
             </label>
 
-            <label for="Tipo de usuário"> <span>Tipo de usuário</span>
-                <br>Professor
-                <input type="radio" id="Professor" value="Professor" name="tipo_usuario">
-                <br>Aluno
-                <input type="radio" id="Aluno" value="Aluno" name="tipo_usuario">
-                <br>
-            </label>
+          <label for="Tipo de usuário">
+              <span>Tipo de usuário</span>
+              <div class="user-type">
+                  <label class="radio-option">
+                      Aluno
+                      <input type="radio" id="Aluno" value="Aluno" name="tipo_usuario">
+                  </label>
+                  <label class="radio-option">
+                      Professor
+                      <input type="radio" id="Professor" value="Professor" name="tipo_usuario">
+                  </label>
+              </div>
+          </label>
 
             <input type="submit" value="Inscrever-se">
         </form>
     </main>
 
+
+-->
+
+  
     <script src="./js/cadastro.js"></script>
 </body>
 

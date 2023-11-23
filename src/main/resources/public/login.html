@@ -29,39 +29,34 @@
 </head>
 
 <body>
-  <nav class="navBAR">
-    <ul class="list">
-      <li class="li"><a href="./cadastro.html">Cadastro</a></li>
-    </ul>
-  </nav>
     <div class="container">
+        <div class="next-to">
+          <h1 class="titulo">THELDO</h1>
+          <p class="paragrafo">A dúvida agarrou? O Theldo ajudou</p> 
+        </div>
         <div class="d-flex justify-content-center h-100">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Log in</h3>
-                    <div class="d-flex justify-content-end social_icon">
-                        <span></span>
-                    </div>
-                </div>
+            <div class="card-">
                 <div class="card-body">
                     <form id="form">
-                        <div class="input-group form-group">
+                        <div class="input-group space">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
                             <input autocomplete="off" type="text" class="form-control" id="nome" name="nome"
                                 placeholder="email">
-
                         </div>
-                        <div class="input-group form-group">
+                        <div class="input-group space">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
                             <input type="password" class="form-control" placeholder="senha" id="senha" name="senha">
                         </div>
-                        <div class="form-group">
+                        <div class="space">
                             <input type="submit" value="Login" class="btn float-right login_btn" id="btn">
                         </div>
+                      <ul class="list" onclick="window.location.href='./cadastro.html'; return false;">
+                          <li class="li"><a>Cadastro</a></li>
+                      </ul>
                     </form>
                 </div>
             </div>
@@ -71,3 +66,82 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+body{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+background: url("bgImage.svg") no-repeat center
+center / cover;
+font-family: "Poppins", sans-serif:
+letter-spacing: 0.1rem;
+gap: 2rem;
+}
+
+
+.input-box {
+position: relative;
+width: 300px;
+}
+
+
+.name-input{
+width: 100%;
+padding: 5px 0;
+border: none;
+bord
+}
+
+
+<section>
+    <div class="leaves">
+        <div class="set">
+            <div><img src="leaf_01.png"></div>
+            <div><img src="leaf_02.png"></div>
+            <div><img src="leaf_03.png"></div>
+            <div><img src="leaf_04.png"></div>
+            <div><img src="leaf_01.png"></div>
+            <div><img src="leaf_02.png"></div>
+            <div><img src="leaf_03.png"></div>
+            <div><img src="leaf_04.png"></div>_
+        </div>
+    </div>
+
+    <img src="bg-jpg" class="bg">
+        <img src="girl.png" class="girl">
+            <div class="login">
+                <h2>Sign In</h2>
+                <div class="inputBox">
+                    <input type="text" placeholder="Username">
+                </div>
+                <div class="inputBox">
+                    <input type="password" placeholder="Password">
+                </div>
+                <div class="inputBox">
+                    <input type="submit" value="login" id="btn">
+                </div>
+                <div class="group">
+                    <a href="#"> Forget Password</a>
+                    <a href="3">Sign Up</a>
+                </div>
+            </div>
+            <img src="trees.png" class="trees">
+</section>
+
+-->

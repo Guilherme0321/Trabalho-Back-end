@@ -8,6 +8,8 @@ public class Professor implements User {
 	private String email;
 	private String senha;
 	private LocalDate data_cadastro;
+	private String perfil;
+
 
 	public Professor(String email, String senha) { // construtor para o login
 		this(null,null,email,senha);
@@ -49,6 +51,13 @@ public class Professor implements User {
 	} */
 	public LocalDate getData_cadastro() {
 		return data_cadastro;
+	}
+	
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+	public String getPerfil() {
+		return perfil;
 	}
 	
 	public String getTipo_user() {

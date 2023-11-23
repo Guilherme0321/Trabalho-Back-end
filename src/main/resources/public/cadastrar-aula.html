@@ -6,6 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!--Fontawesome CDN-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46Jv
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/cadastrarAula.css">
@@ -22,56 +33,101 @@
         <h1>Cadastrar Aula</h1>
         <form id="form" class="form-container">
             <div class="input-group">
-                <label for="Professor">
-                    <span>Professor</span>
-                    <input type="text" id="Professor" name="Professor" required>
-                </label>
-    
-                <label for="Aluno">
-                    <span>Aluno</span>
-                    <input type="text" id="Aluno" name="Aluno" required>
-                </label>
-            </div>
-    
-            <div class="input-group">
                 <label for="Titulo">
                     <span>Título</span>
                     <input type="text" id="Titulo" name="Titulo" required>
+                    <i class="'bx bx-titulo"></i>
                 </label>
     
                 <label for="Descricao">
                     <span>Descrição</span>
                     <input type="text" id="Descricao" name="Descricao" required>
+                    <i class="'bx bx-descricao"></i>
                 </label>
             </div>
     
             <div class="input-group">
                 <label for="Preco">
                     <span>Preço</span>
-                    <input type="number" id="Preco" name="Preco" required>
+                    <input type="number"  placeholder="0.00" min="0.00" step="0.01" id="Preco" name="Preco" required>
+                    <i class="'bx bx-preco"></i>
                 </label>
     
                 <label for="DataDisponivel">
-                    <span>Data Disponível</span>
+                    <span>Data Prevista</span>
                     <input type="datetime-local" id="DataDisponivel" name="DataDisponivel" required>
+                    <i class="'bx bx-data"></i>
                 </label>
             </div>
     
             <div class="input-group">
-                <label for="TipoDeAula">
-                    <span>Tipo de Aula</span>
-                    <input type="text" id="TipoDeAula" name="TipoDeAula" required>
-                </label>
-    
-                <label for="LinkAula">
+                <div class="user-type">
+                    <div class="radio-option">
+                      <label for="Online">
+                        <span>Online</span>
+                        <input type="radio" value="online" id="Online" name="TipoDeAula" required>
+                        <i class="'bx bx-online"></i>
+                      </label>
+                    </div>
+                    <div class="radio-option">
+                      <label for="Presencial">
+                        <span>Presencial</span>
+                        <input type="radio" value="presencial" id="Presencial" name="TipoDeAula" required>
+                        <i class="'bx bx-presencial"></i>
+                      </label>
+                    </div>
+                  </div>
+                <label style="display: none;" id="link" for="LinkAula">
                     <span>Link da Aula</span>
                     <input type="url" id="LinkAula" name="LinkAula" required>
                 </label>
+                <label style="display: none;" id="local">
+                    <span>Local</span>
+                    <span>Rua</span>
+					<input type="text" id="rua" name="rua" required>
+					<span>Número</span>
+					<input type="text" id="numero" name="numero" required>
+					
+					<span>Bairro</span>
+					<input type="text" id="bairro" name="bairro" required>
+                </label>					
             </div>
-    
             <input type="submit" value="Inscrever-se">
         </form>
     </main>
+
+    <form id="form">
+        <div class="input-group space">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input autocomplete="off" type="text" class="form-control" id="Titulo" name="nome"
+                placeholder="Título">
+        </div>
+        <div class="input-group space">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Descrição" id="Descricao" name="senha">
+        </div>
+        <div class="input-group space">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+          </div>
+          <input autocomplete="off" type="number"  placeholder="0.00" min="0.00" step="0.01" type="text" class="form-control" id="Preco" name="nome"
+              placeholder="email">
+        </div>
+        <div class="input-group space">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Descrição" id="Descricao" name="senha">
+        </div>
+        
+        <div class="space">
+            <input type="submit" value="Login" class="btn float-right login_btn" id="btn">
+        </div>
+    </form>
     
 
     <script src="./js/cadastrarAula.js"></script>

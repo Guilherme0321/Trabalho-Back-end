@@ -9,6 +9,7 @@ public interface User {
     String senha = null;
     LocalDate data_cadastro = null;
     String tipo_user = null;
+    String perfil = null;
     
     public Integer getId();
     public String getNome();
@@ -17,4 +18,5 @@ public interface User {
     public String getSenha();
     public LocalDate getData_cadastro();
     public String getTipo_user();
+    public String getPerfil();
 }

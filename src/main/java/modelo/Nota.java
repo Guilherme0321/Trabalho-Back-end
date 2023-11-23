@@ -3,23 +3,19 @@ package modelo;
 public class Nota {
 	private Integer id;
 	private Integer aluno_id;
-	private Integer professor_id;
 	private Integer aula_id;
 	private Integer nota;
-	private String comentario;
 	private String origem; // se a nota veio de um professor ou de um aluno
 	
-	public Nota(Integer id, Integer aluno_id, Integer professor_id) {
-		this(id,aluno_id,professor_id,null,null,null,null);
+	public Nota(Integer id, Integer aluno_id) {
+		this(id,aluno_id,null,null,null);
 	}
 	
-	public Nota(Integer id, Integer aluno_id, Integer professor_id, Integer aula_id, Integer nota, String comentario, String origem) {
+	public Nota(Integer id, Integer aluno_id, Integer aula_id, Integer nota, String origem) {
 		this.id = id;
 		this.aluno_id = aluno_id;
-		this.professor_id = professor_id;
 		this.aula_id = aula_id;
 		this.nota = nota;
-		this.comentario = comentario;
 		this.setOrigem(origem);;
 	}
 	
@@ -31,20 +27,12 @@ public class Nota {
 		this.aluno_id = alunoId;
 	}
 	
-	public void setProfessorId(Integer professorId) {
-		this.professor_id = professorId;
-	}
-	
 	public void setAulaId(Integer aulaId) {
 		this.aula_id = aulaId;
 	}
 	
 	public void setNota(Integer nota) {
 		this.nota = nota;
-	}
-	
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
 	}
 	
 	public Integer getId() {
@@ -55,20 +43,12 @@ public class Nota {
 		return aluno_id;
 	}
 	
-	public Integer getProfessorId() {
-		return professor_id;
-	}
-	
 	public Integer getAulaId() {
 		return aula_id;
 	}
 	
 	public Integer getNota() {
 		return nota;
-	}
-	
-	public String getComentario() {
-		return comentario;
 	}
 
 	public String getOrigem() {

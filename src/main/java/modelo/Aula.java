@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 public class Aula {
 	private Integer id;
 	private Integer professor_id;
-	private Integer aluno_id;
 	private String materia;
 	private String descricao;
 	private Double preco;
@@ -15,10 +14,9 @@ public class Aula {
 	private String tipo_aula;
 	private String link_aula;
 		
-	public Aula(Integer id, Integer aluno_id, Integer professor_id, String materia, String descricao, Double preco, LocalDateTime data_disponivel, LocalDate data_criacao, String tipo_aula, String link) {
+	public Aula(Integer id, Integer professor_id, String materia, String descricao, Double preco, LocalDateTime data_disponivel, LocalDate data_criacao, String tipo_aula, String link) {
 		this.id = id;
 		this.professor_id = professor_id;
-		this.aluno_id = aluno_id;
 		this.materia = materia;
 		this.descricao = descricao;
 		this.preco = preco;
@@ -82,14 +80,6 @@ public class Aula {
 	
 	public LocalDate getDataCriacao() {
 		return data_criacao;
-	}
-
-	public Integer getAluno_id() {
-		return aluno_id;
-	}
-
-	public void setAluno_id(Integer aluno_id) {
-		this.aluno_id = aluno_id;
 	}
 
 	public String getTipo_aula() {
