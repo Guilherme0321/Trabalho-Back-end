@@ -10,7 +10,7 @@ import com.google.gson.JsonObject;
 
 import dao.AulaDao;
 import dao.NotaDao;
-import modelo.Aula;
+import modelo.*;
 import sistemaInteligente.ConnectorInteligenteSystem;
 import spark.Request;
 import spark.Response;
@@ -57,10 +57,11 @@ public class AulaService {
 		
 		
 		System.out.println(idProf_nota);
-		String x = ConnectorInteligenteSystem.sendToSystemInteligente(info, idProf_nota);
+		String output = ConnectorInteligenteSystem.send(info, idProf_nota);
 		
-		System.out.println(x);
-
+		System.out.println(output);
+		
+		
 		ArrayList<Aula> aulas = dao.listAulas(text);
 		
 		for(Aula aula : aulas) {
