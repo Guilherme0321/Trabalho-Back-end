@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import dao.AulaDao;
+import dao.NotaDao;
 import modelo.Aula;
 import spark.Request;
 import spark.Response;
@@ -40,15 +41,22 @@ public class AulaService {
 	
 	public static String getAulas(Request req, Response res){
 		AulaDao dao = new AulaDao();
+		NotaDao notaDao = new NotaDao();
 		String text = req.queryParams("serach");
 		String id_user = req.queryParams("id_aluno");
 		
-		System.out.println(id_user);
-		ArrayList<String> integentDataFilter = NotaService.filterNotas("a");
+		ArrayList<String> integentDataFilter = NotaService.filterNotas(text);
+		
 		
 		for(String x : integentDataFilter) {
 			System.out.println(x); // printar
 		}
+		// if id_user == null, ou seja aquele aluno ainda n deu nenhuma nota o que fazer
+		
+		int idProf_nota = notaDao.getBiggerNota(Integer.parseInt(id_user));
+		
+		System.out.println(idProf_nota);
+			
 		System.out.println();
 		System.out.println();
 		ArrayList<Aula> aulas = dao.listAulas(text);
@@ -77,6 +85,7 @@ public class AulaService {
 	    }
 	    jsonBuilder.append("]");
 	    dao.close();
+	    notaDao.close();
 
 	    return jsonBuilder.toString();
 	}

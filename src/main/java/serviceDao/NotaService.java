@@ -37,7 +37,7 @@ public class NotaService {
  		AulaDao aulaDao = new AulaDao();
  		NotaDao notaDao = new NotaDao();
  		UserDao userDao = new UserDao();
- 		filter = filter.toUpperCase(); //  ARRUMAR O PROBLEMA DO FRONT MANDAR TUDO EM LOWER CASE
+ 		 		
  		ArrayList<Nota> notas = notaDao.listBy(filter);
  		ArrayList<Aula> aulas = new ArrayList<>();
  		
@@ -54,7 +54,12 @@ public class NotaService {
  			int professor_id = aulas.get(i).getProfessorId();
  			String perfil = userDao.getProfessor(professor_id).getPerfil();
  			float media = media(notas, aula_id);
- 			String data = aula_id + "," + professor_id + "," + perfil + "," + media;
+ 			String data = "";
+ 			if(perfil == null) { 				
+ 				data = aula_id + "," + professor_id + "," + "," + media;
+ 			}else {
+ 				data = aula_id + "," + professor_id + "," + perfil + "," + media;
+ 			}
  			integentSystemData.add(data);
  		}
  		

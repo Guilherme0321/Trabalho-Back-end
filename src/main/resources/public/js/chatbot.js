@@ -25,7 +25,7 @@ const chatWindow = document.getElementById('chat-window');
 	}
     
    function enviarRequisicao(){
-	   let x = document.querySelector("#user-input").value
+	   let x = document.querySelector("#user-input").value;
 	   fetch("/listarAula?serach=" + x + '&id_aluno=' + acesso.id)
 	   	.then(function(res){
 		return res.text();
@@ -39,12 +39,33 @@ const chatWindow = document.getElementById('chat-window');
 		});
    }
    
-   function sendFromChat(text){
-	   let jsonAula = JSON.parse(text);
-	   Object.values(jsonAula).forEach(aula => {
-			chatWindow.innerHTML += `<div class='chat'><p>${aula.titulo},${aula.descricao},${aula.preco},${aula.data_horario},${aula.tipo},${aula.link}</p></div>`;
-	   })
-   }
+function sendFromChat(text) {
+  let jsonAula = JSON.parse(text);
+  let tableHtml = `<table>
+                    <tr>
+                      <th>Título</th>
+                      <th>Descrição</th>
+                      <th>Preço</th>
+                      <th>Data e Horário</th>
+                      <th>Tipo</th>
+                      <th>Link</th>
+                    </tr>`;
+
+  Object.values(jsonAula).forEach(aula => {
+    tableHtml += `<tr>
+                    <td>${aula.titulo}</td>
+                    <td>${aula.descricao}</td>
+                    <td>${aula.preco}</td>
+                    <td>${aula.data_horario}</td>
+                    <td>${aula.tipo}</td>
+                    <td>${aula.link}</td>
+                  </tr>`;
+  });
+
+  tableHtml += `</table>`;
+  chatWindow.innerHTML += `<div class='chat'>${tableHtml}</div>`;
+}
+
 
     function sendMessage() {
       const message = userInput.value;

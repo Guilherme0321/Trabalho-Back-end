@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import modelo.*;
 
@@ -79,34 +80,35 @@ public class NotaDao {
 		return list(sql);
 	}
 	
+	public int getBiggerNota(int id_aluno){
+		AulaDao aulaDao = new AulaDao();
+		Integer aulaNota_id = null;
+		String sql = "SELECT id_aula FROM nota WHERE id_aluno = " + id_aluno + " ORDER BY nota ASC LIMIT 1;";
+		try {
+			Statement statement = con.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			if(result.next()) {
+				aulaNota_id = result.getInt(1);				
+			}
+			result.close();
+			statement.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if(aulaNota_id == null) {
+			return -1;
+		}else {			
+			Aula temp = aulaDao.searchFor(aulaNota_id);
+			aulaDao.close();
+			return temp.getProfessorId() ;
+		}
+	}
+	
 	public void close() {
 		try {
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static void main(String[] args) {
-		NotaDao nota = new NotaDao();
-		AulaDao aula = new AulaDao();
-		ArrayList<Nota> notas = nota.listBy("A");
-		for(Nota n : notas) {
-			System.out.println(n.getAulaId());
-		}
-		
-		System.out.println();
-		ArrayList<Aula> aulas = new ArrayList<Aula>();
-		
-		for(Nota n : notas) {
-			aulas.add(aula.searchFor(n.getAulaId()));
-		}
-		
-		for(Aula n : aulas) {
-			System.out.println(n.getMateria() + " " + n.getDescricao() + " " + n.getId());
-		}
-		
-		aula.close();
-		nota.close();
 	}
 }

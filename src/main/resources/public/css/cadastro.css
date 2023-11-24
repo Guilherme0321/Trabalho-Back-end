@@ -1,20 +1,115 @@
-* :not(ul.list) {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  box-sizing: border-box;
-}
+/* Adicione esses estilos ao arquivo cadastro.css */
 
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente */
-  justify-content: center; /* Centraliza verticalmente */
-  min-height: 100vh;
-  background: rgb(255, 255, 255);
+    background-color: #f8f9fa;
 }
 
-/*
+main {
+    margin-top: 50px;
+}
+
+h1 {
+    text-align: center;
+    color: #007bff;
+}
+
+.custom-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.custom-list li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.card- {
+    max-width: 400px;
+    width: 100%;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group-prepend {
+    background-color: #007bff;
+    color: #fff;
+    height: 38px; /* Ajuste a altura conforme necessário */
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.input-group-prepend svg {
+    fill: #fff;
+    margin-right: 8px;
+}
+
+.form-control {
+    height: 38px; /* Ajuste a altura conforme necessário */
+}
+
+.space {
+    margin-bottom: 20px;
+}
+
+.user-type {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.radio-option {
+    flex: 1;
+    text-align: center;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.list li {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.list li a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.list li a:hover {
+    text-decoration: underline;
+}
+#form > label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 ul.list {
   display: flex;
   justify-content: space-around;
@@ -36,158 +131,6 @@ ul.list:hover {
   background: rgb(0, 143, 38);
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
-*/
-
-main {
-  width: 80%; /* Ajusta a largura principal para 80% da largura do contêiner pai */
-  max-width: 600px; /* Define uma largura máxima para garantir uma boa leitura em telas maiores */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5px;
-}
-
-/* Ajustes para os campos de formulário */
-main form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px; /* Ajusta o espaçamento entre o título e o formulário */
-}
-
-main form label {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px; /* Ajusta o espaçamento entre os campos do formulário */
-  
-}
-
-main form input {
-    width: 100%;
-    max-width: 300px;
-    height: 50px;
-    padding: 0.5rem;
-    margin-top: 10px;
-    outline: none;
-    font-size: 1rem;
-    border: 1px solid #040B18;
-    border-radius: 8px; /* Adiciona bordas arredondadas */
-}
-
-main form input[type="submit"] {
-    cursor: pointer;
-    width: 100%;
-    max-width: 250px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 32px;
-    background-color: #033d5a;
-    color: rgb(209, 204, 204);
-    font-size: 1.1rem;
-    transition: all .3s ease-in-out;
-}
-
-main form input[type="text"] {
-    border-radius: 5px; /* Ajuste conforme necessário */
-    border: 2px solid #033d5a; /* Cor da borda das caixas */
-    max-width: 270px;
-    max-height: 100px;
-    
-}
-main form input#senha {
-    border-radius: 5px; /* Ajuste conforme necessário */
-    border: 2px solid #033d5a; /* Cor da borda das caixas */
-   max-width: 270px;
-  max-height: 100px
-}
-
-main form input[type="submit"]:hover {
-  background-color: #065177;
-}
-
-.user-type {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 300px; /* Define uma largura máxima para evitar que a seção fique muito larga */
-  margin-top: 20px; /* Ajusta o espaçamento abaixo da seção de tipo de usuário */
-}
-
-.radio-option {
-  text-align: center;
-}
-
-.user-type label {
-  width: 100%;
-  max-width: 150px; /* Define uma largura máxima para evitar que os rótulos fiquem muito largos */
-  color: rgb(0, 0, 0);
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all .3s ease-in-out;
-  font-size: 1rem;
-  padding: 0.5rem;
-}
-
-
-
-/* Card Styles */
-.card- {
-    width: 40vh;
-    background-color: rgb(255, 255, 255, 0.75);
-    box-shadow: #595959 1vh 1vh 2vh 0vh;
-    border-radius: 1vh;
-}
-
-.input-group.space {
-    margin-bottom: 2vh;
-}
-
-input.form-control {
-    width: 100%;
-    font-size: 2vh;
-}
-
-input#btn {
-    width: 100%;
-    font-size: 2vh;
-    color: white;
-    font-weight: bold;
-    margin-bottom: 5vh;
-    background: #0076ff;
-    transition: .5s background;
-}
-
-input#btn:hover {
-    background: #004799;
-}
-
-ul.list {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style: none;
-  background: rgb(0 190 51);
-  margin: 10px auto;
-  width: 25%;
-  color: #FFFFFF;
-  border-radius: 15px;
-  height: 50px;
-  margin-top: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: .5s background;
-}
-ul.list:hover {
-  background: rgb(0, 143, 38);
-}
-
 li.a {
   color: white;
 }
@@ -197,10 +140,3 @@ a {
   color: white;
   font-weight: 20%;
 }
-
-
-li.li {
-    color: white;
-}
-
-
