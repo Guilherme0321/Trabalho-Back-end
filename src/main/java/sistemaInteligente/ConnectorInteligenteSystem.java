@@ -4,25 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class ConnectorInteligenteSystem {
-    public static String sendToSystemInteligente(String[] x, int y) {
-        String output = "";
+    public static String sendToSystemInteligente(String x, int y) {
+        StringBuilder output = new StringBuilder();
+
         try {
             String pythonExecutable = "python";
             String pythonScript = "\\Back_end_THELDO\\src\\main\\java\\sistemaInteligente\\SistemaIntegente.py";
 
             // Construa o comando completo
-            String[] command = new String[]{pythonExecutable, pythonScript};
-
-            // Adicione os parâmetros ao comando
-            for (String param : x) {
-                command = Arrays.copyOf(command, command.length + 1);
-                command[command.length - 1] = param;
-            }
-            command = Arrays.copyOf(command, command.length + 1);
-            command[command.length - 1] = Integer.toString(y);
+            String[] command = new String[]{pythonExecutable, pythonScript, x, String.valueOf(y)};
 
             // Execute o processo
             Process process = Runtime.getRuntime().exec(command);
@@ -32,7 +24,7 @@ public class ConnectorInteligenteSystem {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while ((line = reader.readLine()) != null) {
-                output += line;
+                output.append(line).append("\n");
                 System.out.println(line);
             }
 
@@ -43,6 +35,6 @@ public class ConnectorInteligenteSystem {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-        return output;
+        return output.toString();
     }
 }

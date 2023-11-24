@@ -47,20 +47,20 @@ public class AulaService {
 		String id_user = req.queryParams("id_aluno");
 		
 		ArrayList<String> integentDataFilter = NotaService.filterNotas(text);
-		
-		String[] info = new String[integentDataFilter.size()];
-		
+		String info = "";
 		for(int i = 0; i < integentDataFilter.size(); i++) {
-			info[i] = integentDataFilter.get(i);
+			info += integentDataFilter.get(i) + '\n';
 		}
+		System.out.println(info);
 		
 		int idProf_nota = notaDao.getBiggerNota(Integer.parseInt(id_user));
+		
+		
+		System.out.println(idProf_nota);
 		String x = ConnectorInteligenteSystem.sendToSystemInteligente(info, idProf_nota);
 		
 		System.out.println(x);
-			
-		System.out.println();
-		System.out.println();
+
 		ArrayList<Aula> aulas = dao.listAulas(text);
 		
 		for(Aula aula : aulas) {

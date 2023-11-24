@@ -4,21 +4,6 @@
   box-sizing: border-box;
 }
 
-ul.list {
-  display: flex;
-  justify-content: space-around; /* Alterado para distribuir espaço entre os itens */
-  align-items: center;
-  list-style: none;
-  background:#333;
-  margin: 10px auto;
-  width: 20%; /* Ajustado para ocupar 80% da largura */
-  height: 10%;
-  color: #333;
-  border-radius: 15px;
-  height: 80px;
-}
-
-
 body {
   display: flex;
   justify-content: center;
@@ -28,12 +13,12 @@ body {
 }
 
 main {
-  width: 80vw; /* Adjusted width */
+  width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 5px; /* Adjusted margin */
+  margin-top: 5px;
 }
 
 nav.navBAR {
@@ -43,7 +28,7 @@ nav.navBAR {
 }
 
 main h1 {
-  font-size: 2rem; /* Adjusted font size */
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -53,14 +38,14 @@ main form {
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-  text-align: center; /* Added to center the text */
+  text-align: center;
 }
 
 main form label,
 main form input,
 .main form input[type="submit"] {
-  width: 100%; /* Adjusted width */
-  margin-bottom: 10px; /* Added for spacing between elements */
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 main form label span {
@@ -69,28 +54,35 @@ main form label span {
 }
 
 main form input {
-  height: 40px; /* Adjusted height */
-  padding: 0.5rem; /* Adjusted padding */
+  height: 40px;
+  padding: 0.5rem;
   outline: none;
   font-size: 1rem;
   border: 1px solid #333;
 }
 
 main form input[type="submit"] {
-  margin-top: 1.5rem; /* Adjusted margin */
+  margin-top: 1.5rem;
 }
 
 .user-type {
   display: flex;
-  justify-content: space-around;
-  width: 80%;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
   margin-top: 10px;
 }
 
 .radio-option {
   text-align: center;
-  margin: 0 10px;
-  width: 48%; /* Ajustado para garantir algum espaço entre os botões */
+  width: auto;
+}
+
+@media (max-width: 576px) {
+  .user-type {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .user-type label {
@@ -100,7 +92,7 @@ main form input[type="submit"] {
 }
 
 .user-type input {
-  width: auto; /* Ajustado para ocupar apenas o tamanho necessário */
+  width: auto;
 }
 
 .user-type input[type="radio"]:hover {
@@ -118,10 +110,10 @@ main form input[type="submit"] {
 
 .form-container {
   display: flex;
-  flex-direction: column; /* Align items vertically */
+  flex-direction: column;
   justify-content: space-between;
-  width: 20%; /* Adjusted width */
-  height: 400px; /* Adjusted height */
+  width: 20%;
+  height: 400px;
   padding: 15px;
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-radius: 20px;
@@ -131,20 +123,20 @@ main form input[type="submit"] {
 
 h1 {
   color: #000000;
-  font-size: 1rem; /* Adjusted font size */
+  font-size: 1rem;
   display: flex;
   justify-content: center;
   padding: 10px 0;
 }
 
 .input-group .input {
-  height: 100px; /* Adjusted height */
-  width: 50%; /* Adjusted width */
+  height: 100px;
+  width: 50%;
   border: none;
   border-radius: 15px;
   color: #fff;
   font-size: 15px;
-  padding: 0 0 0 15px; /* Adjusted padding */
+  padding: 0 0 0 15px;
   background: rgba(0, 0, 0, 0.1);
   outline: none;
 }
@@ -156,12 +148,13 @@ i {
   color: #fff;
 }
 
-#link-aula, .endereco{
+#link-aula,
+.endereco {
   display: none;
 }
 
 .input-group {
-  width: 100%; /* Adjusted width */
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -173,7 +166,6 @@ i {
   width: 100%;
 }
 
-/* Made with love by Mutiullah Samim*/
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 * {
@@ -190,11 +182,8 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  /* Added to make content stack vertically */
   justify-content: center;
-  /* Added to vertically center content */
   align-items: center;
-  /* Added to horizontally center content */
 }
 
 .space {
@@ -218,26 +207,28 @@ p.paragrafo {
   position: relative;
 }
 
-
 ul.list {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   list-style: none;
   background: rgb(0 190 51);
-  margin: 10px auto;
-  width: 50%;
+  width: 100%;
   color: #FFFFFF;
-  border-radius: 15px;
-  height: 50px;
-  margin-top: 10px;
+  height: 35px;
+  margin-top: 0px;
   font-weight: bold;
   cursor: pointer;
   transition: .5s background;
+  margin: 0px 0px 0px;
 }
 
 ul.list:hover {
   background: rgb(0, 143, 38);
+}
+
+li.li {
+  margin-right: 30px; 
 }
 
 li.a {
@@ -261,10 +252,10 @@ h3 {
 }
 
 .card- {
-    width: 40vh;
-    background-color: rgb(255,255,255,0.75);
-    box-shadow: #595959 1vh 1vh 2vh 0vh;
-    border-radius: 1vh;
+  width: 40vh;
+  background-color: rgb(255, 255, 255, 0.75);
+  box-shadow: #595959 1vh 1vh 2vh 0vh;
+  border-radius: 1vh;
 }
 
 input#btn {
@@ -290,18 +281,13 @@ span.input-group-text {
   justify-content: center;
   align-items: center;
   height: 10%;
-  /* Adjust the height as needed */
   margin-bottom: 10%;
-  /* Added margin to separate the tags from the login block */
 }
 
 .header-tag {
   margin: 0 10%;
-  /* Adjust the spacing as needed */
   font-size: 24px;
-  /* Adjust the font size as needed */
   color: white;
-  /* Set the color to white */
 }
 
 .card {
@@ -345,15 +331,3 @@ input:focus {
 
 .remember input {
   width: 20px;
-  height: 20px;
-  margin-left: 15px;
-  margin-right: 5px;
-}
-
-.links {
-  color: white;
-}
-
-.links a {
-  margin-left: 4px;
-}

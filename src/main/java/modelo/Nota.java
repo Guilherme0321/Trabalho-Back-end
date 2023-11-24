@@ -5,7 +5,7 @@ public class Nota {
 	private Integer aluno_id;
 	private Integer aula_id;
 	private Integer nota;
-	private String origem; // se a nota veio de um professor ou de um aluno
+	private String origem;
 	
 	public Nota(Integer id, Integer aluno_id) {
 		this(id,aluno_id,null,null,null);

@@ -90,7 +90,6 @@ public class ReservaDao {
 		try {
 			Statement statment = con.createStatement();
 			String query = "SELECT * FROM reserva WHERE status = 'pendente' AND id_aula in " + test;
-			System.out.println(query);
 			ResultSet resul = statment.executeQuery(query);
 			while(resul.next()) {
 				Integer id = resul.getInt("id");
