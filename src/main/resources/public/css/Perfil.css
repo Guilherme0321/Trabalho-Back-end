@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.profile-container {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.input-field {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#sobre_mim {
+    line-height: 1.5; 
+    resize: vertical; 
+    overflow-y: auto; 
+}
+
+input, textarea {
+    margin-bottom: 10px;
+}
+
+.save-button, .sair-button {
+    margin-right: 10px;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    margin-right: 10px;
+    transition: color 0.3s ease; /* Animação de destaque nos links */
+}
+
+.nav-link {
+    color: black; /* Cor padrão do texto */
+}
+
+
+.nav-item:hover .nav-link {
+    color: white; /* Cor do texto ao passar o mouse */
+}

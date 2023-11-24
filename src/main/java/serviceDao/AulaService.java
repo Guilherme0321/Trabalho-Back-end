@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 import dao.AulaDao;
 import dao.NotaDao;
 import modelo.Aula;
+import sistemaInteligente.ConnectorInteligenteSystem;
 import spark.Request;
 import spark.Response;
 
@@ -47,15 +48,16 @@ public class AulaService {
 		
 		ArrayList<String> integentDataFilter = NotaService.filterNotas(text);
 		
+		String[] info = new String[integentDataFilter.size()];
 		
-		for(String x : integentDataFilter) {
-			System.out.println(x); // printar
+		for(int i = 0; i < integentDataFilter.size(); i++) {
+			info[i] = integentDataFilter.get(i);
 		}
-		// if id_user == null, ou seja aquele aluno ainda n deu nenhuma nota o que fazer
 		
 		int idProf_nota = notaDao.getBiggerNota(Integer.parseInt(id_user));
+		String x = ConnectorInteligenteSystem.sendToSystemInteligente(info, idProf_nota);
 		
-		System.out.println(idProf_nota);
+		System.out.println(x);
 			
 		System.out.println();
 		System.out.println();
@@ -70,7 +72,6 @@ public class AulaService {
 	    for (int i = 0; i < aulas.size(); i++) {
 	    	Aula aula = aulas.get(i);
 	        jsonBuilder.append("{");
-	        //jsonBuilder.append("\"professor\":\"" + aula.getProfessorId() + "\",");
 	        jsonBuilder.append("\"titulo\":\"" + aula.getMateria() + "\",");
 	        jsonBuilder.append("\"descricao\":\"" + aula.getDescricao() + "\",");
 	        jsonBuilder.append("\"preco\":\"" + aula.getPreco() + "\",");

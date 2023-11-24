@@ -24,7 +24,6 @@ public class ReservaService {
 		String tipo = req.queryParams("tipo");
 		
 		ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-		
 		if(tipo.equals("professor")) {
 			Professor prof = new Professor(id_user, null, null, tipo);
 			ArrayList<Aula> aulas_do_usuario = auladao.listAulas(prof);

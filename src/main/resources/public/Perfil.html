@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/Perfil.css">
+</head>
+<body>
+
+   <nav class="navbar navbar-expand-lg navbar-light bg-success">
+     <ul class="navbar-nav mr-auto">
+       <li class="nav-item"><a class="nav-link" href="./index.html">Home</a></li>
+       <li class="nav-item"><a class="nav-link" href="./chatbot.html">ChatBot</a></li>
+       <li class="nav-item" id="cadastrar_aula"><a class="nav-link" href="./cadastrar-aula.html">Cadastrar aula</a></li>
+     </ul>
+   </nav>
+
+    <div class="container mt-4">
+        <div class="profile-container">
+            <h2>Perfil</h2>
+            <form id="profile-form"> 
+                <div class="profile-details">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" class="form-control" id="nome" placeholder="Nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_usuario">Tipo de Usuario</label>
+                        <input type="text" class="form-control" id="tipo_usuario" placeholder="Tipo de Usuario">
+                    </div>
+                    <div class="form-group">
+                        <label for="sobre_mim">Sobre Mim</label>
+                        <textarea class="form-control" id="sobre_mim" placeholder="Sobre Mim"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-primary save-button" onclick="saveProfile()">Salvar</button>
+                    <button type="button" class="btn btn-danger sair-button" onclick="localStorage.clear()">Sair</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="./js/Perfil.js"></script> 
+</body>
+</html>
